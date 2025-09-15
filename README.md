@@ -61,6 +61,7 @@ If you only want a VM for debugging, skip step 4, which makes the VM available t
       The PAT is very important, without it, the runner will not be registered to the ROOT repo. PAT stands for personal access token, please refer to githubs documentation for more detailed information: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
       To create your own, you need valid permissions in the ROOT repo, please ask your supervisor or the repo owner for the token.
       The token itself needs the follwing permission: 
+      https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens?apiVersion=2022-11-28#organization-permissions-for-self-hosted-runners
       A daemon and a matching script will be copied from ~/MARBLE to the VM and launch an ephemeral runner whenever the VM is started.
     For SPI:
       Execute 'HOST_SPI_03_configure_daemon.sh $VM_NAME'
@@ -108,3 +109,6 @@ prlctl list -i $VM_NAME
 
 5 To execute a command on a VM
 prlctl exec $VM_NAME "$COMMAND"
+
+6 All prlctl commands are documented here as well
+https://download.parallels.com/desktop/v20/docs/en_US/Parallels%20Desktop%20Command-Line%20Reference.pdf
