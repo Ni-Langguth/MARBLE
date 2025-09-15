@@ -40,6 +40,7 @@ else
   echo "File not found. Downloading from S3..."
   /Users/sftnight/Library/Python/3.9/bin/s3cmd get s3://macvmstorage/build_drive.hdd /Users/sftnight/Parallels/build_drive.hdd
   unzip -j /Users/sftnight/Parallels/build_drive.hdd.zip -d /Users/sftnight/Parallels/build_drive.hdd
+  rm -rf /Users/sftnight/Parallels/build_drive.hdd.zip
 fi
 
 # RENAME VM INTERNALLY
@@ -50,7 +51,8 @@ prlctl exec $VM_NAME "sudo scutil --set ComputerName $VM_NAME"
 prlctl exec $VM_NAME "sudo scutil --set HostName $VM_NAME"
 prlctl stop $VM_NAME --kill
 sleep 3
-
+# CLEAN UP VM ZIP
+rm -rf /Users/sftnight/Parallels/${STORAGE_VM_NAME}.zip
 MSG="
 After executing this script, the following steps must be performed manually: \n
 \t - Register the VM to the CERN network at https://landb.cern.ch/portal/devices/register \n
