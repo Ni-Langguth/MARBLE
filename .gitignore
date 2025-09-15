@@ -1,0 +1,4 @@
+# Ignore the secret .s3cfg with access keys to the VM bucket
+.s3cfg
+# Ignore files beginning with 'test'
+test*
