@@ -19,8 +19,7 @@ ls /Users/sftnight/Parallels/build_drive.hdd
 # Create a VM with: max CPU cores, max recommended RAM (sys RAM - 6GB), a virtual drive with 64 GB, and bridged network (to allow ssh via CERN network), then turns isolation off to allow 'prlctl exec', adds build_drive to VM, and starts VM
 prlctl create ${VM_NAME} -o macos --no-hdd --restore-image $PATH_TO_IPSW
 prlctl set ${VM_NAME} --cpus $(sysctl -n hw.ncpu)
-prlctl set ${VM_NAME} --memsize auto
-prlctl set ${VM_NAME} --memsize $(bc <<< "($(sysctl -n hw.memsize)-2147483648)/1024/1024")
+prlctl set ${VM_NAME} --memsize $(bc <<< "($(sysctl -n hw.memsize)-4*1073741824)/1024/1024")
 prlctl set ${VM_NAME} --device-add hdd --type plain --size 65536
 prlctl set ${VM_NAME} --device-set net0 --type bridged --iface default
 prlctl set ${VM_NAME} --isolate-vm off

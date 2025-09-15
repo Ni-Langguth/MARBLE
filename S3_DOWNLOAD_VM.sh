@@ -31,7 +31,7 @@ prlctl set ${VM_NAME} --device-add net --type bridged --iface default
 
 # set hardware parameters according to host
 prlctl set ${VM_NAME} --cpus $(sysctl -n hw.ncpu)
-prlctl set ${VM_NAME} --memsize $(bc <<< "($(sysctl -n hw.memsize)-1073741824)/1024/1024")
+prlctl set ${VM_NAME} --memsize $(bc <<< "($(sysctl -n hw.memsize)-4*1073741824)/1024/1024")
 
 # Check whether there is a build_drive, if there is none on this host, download it from S3 as well
 if [[ -d /Users/sftnight/Parallels/build_drive.hdd ]]; then
