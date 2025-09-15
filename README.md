@@ -44,7 +44,7 @@ If you only want a VM for debugging, skip step 4, which makes the VM available t
 
 Either:
 
-1 Download an ipsw file for your desired MacOS version from a trusted online source, these are recovery files for MacOS, hosted on Apples server, for which Apple has removed the link from their App Store. Since the links to these files were removed from the developer app store, the links are now exposed on third party sides. Make sure that these links actually point to apples servers before downloading. Parallels should also not accept unsigned ipsw files.
+1 Download an ipsw file for your desired MacOS version from a trusted online source, these are recovery files for MacOS, hosted on Apples server, for which Apple has removed the link from their App Store. Since the links to these files were removed from the developer app store, the links are now exposed on third party websites. Make sure that these links actually point to apples servers before downloading. Parallels should also not accept unsigned ipsw files.
 
 2 Create and configure the VMs with the prlctl and prl_disktool packages uniformly for the ROOT and SPI VMs:
     Execute 'HOST_create_vm.sh $PATH_TO_IPSW_IMAGE $VM_NAME'
@@ -61,7 +61,8 @@ Or:
 
   Execute 'S3_DOWNLOAD.sh $VM_NAME' to download, unpack and reconfigure a prepared VM - it must still be added to the network: https://landb.cern.ch/portal/devices/register and the PAT is not stored in the uploaded VMs.
 
-Then add the VM to CI:    
+Then add the VM to CI:
+
   Bootstrap a daemon on the VM to perform automated tasks once the VM is launched:
     For ROOT:
       Execute 'HOST_ROOT_03_setup_runner.sh $VM_NAME $PAT'
