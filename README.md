@@ -43,6 +43,7 @@ Create a CI VM
 If you only want a VM for debugging, skip step 4, which makes the VM available to the respective CI manager.
 
 Either:
+
 1 Download an ipsw file for your desired MacOS version from a trusted online source, these are recovery files for MacOS, hosted on Apples server, for which Apple has removed the link from their App Store. Since the links to these files were removed from the developer app store, the links are now exposed on third party sides. Make sure that these links actually point to apples servers before downloading. Parallels should also not accept unsigned ipsw files.
 
 2 Create and configure the VMs with the prlctl and prl_disktool packages uniformly for the ROOT and SPI VMs:
@@ -57,10 +58,11 @@ Either:
     These scripts use the prlctl exec command to execute install-scripts, which are shared from the HOST to the VM, on the VM itself, installing packages there, which differ from team to team. Be sure to install the correct package versions for the correct MacOS version, they might differ too.
 
 Or:
-    Execute 'S3_DOWNLOAD.sh $VM_NAME' to download, unpack and reconfigure a prepared VM - it must still be added to the network: https://landb.cern.ch/portal/devices/register and the PAT is not stored in the uploaded VMs.
+
+  Execute 'S3_DOWNLOAD.sh $VM_NAME' to download, unpack and reconfigure a prepared VM - it must still be added to the network: https://landb.cern.ch/portal/devices/register and the PAT is not stored in the uploaded VMs.
 
 Then add the VM to CI:    
-Bootstrap a daemon on the VM to perform automated tasks once the VM is launched:
+  Bootstrap a daemon on the VM to perform automated tasks once the VM is launched:
     For ROOT:
       Execute 'HOST_ROOT_03_setup_runner.sh $VM_NAME $PAT'
       The PAT is very important, without it, the runner will not be registered to the ROOT repo. PAT stands for personal access token, please refer to githubs documentation for more detailed information: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
