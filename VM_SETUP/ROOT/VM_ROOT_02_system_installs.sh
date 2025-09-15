@@ -2,7 +2,7 @@
 # Double-check the versions of the specified software to be installed - especially gfortran - because it might differ between macOS versions.
 
 # The VM mounts the Home Directory of the Host automatically and can access the scripts stored there
-SHARED_MARBLE_DIR="/Volumes/My\ Shared\ Files/Home/MARBLE"
+SHARED_MARBLE_DIR="/Volumes/My Shared Files/Home/MARBLE"
 
 
 HOME=/Users/sftnight
@@ -150,8 +150,8 @@ echo "export PATH=\$PATH:/Users/sftnight/Library/Python/3.9/bin" >> /Users/sftni
 
 sudo -u sftnight HOME=/Users/sftnight mkdir -p /Users/sftnight/Library/Python/3.9/lib/python/site-packages
 sudo -u sftnight HOME=/Users/sftnight python3 -m pip install --upgrade pip
-sudo -u sftnight HOME=/Users/sftnight python3 -m pip install --force-reinstall --user --no-cache-dir -r ${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/requirements.txt openstacksdk==1.4.0 onnx==1.15.0 xgboost==2.0.3 urllib3==1.26.20
+sudo -u sftnight HOME=/Users/sftnight python3 -m pip install --force-reinstall --user --no-cache-dir -r "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/requirements.txt" openstacksdk==1.4.0 onnx==1.15.0 xgboost==2.0.3 urllib3==1.26.20
 
 sudo ln -s /Users/sftnight/Library/Python/3.9/bin/ipython /usr/local/bin/ipython
 sudo ln -s /Users/sftnight/Library/Python/3.9/bin/ipython3 /usr/local/bin/ipython3
-sudo ln -s /Users/sftnight/Library/Python/3.9/bin/jupyter /usr/local/bin/j
+sudo ln -s /Users/sftnight/Library/Python/3.9/bin/jupyter /usr/local/bin/jupyter
