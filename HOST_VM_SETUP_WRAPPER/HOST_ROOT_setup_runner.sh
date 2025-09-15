@@ -1,24 +1,38 @@
 # The VM mounts the Home Directory of the Host automatically and can access the scripts stored there
-# This script requires a PAT with permissions to register a runner to the root repo as its second argument.
+# arg1: VM_NAME, arg2: PAT
+if [[ -z $2 ]]; then
+  read -p "Enter the name of the VM you want to set up: " VM_NAME
+  read -p "Enter the github PAT: " PAT
+else
+  VM_NAME=$1
+  PAT=$2
+fi
 
 SHARED_MARBLE_DIR="/Volumes/My\ Shared\ Files/Home/MARBLE"
 
 isVMon() {
-  prlctl list --no-header | grep $1 | wc -l
+  prlctl list --no-header | grep $VM_NAME | wc -l
 }
 
 startVM() {
-  prlctl start $1 > /dev/null 2>&1
+  echo "Starting $VM_NAME"
+  prlctl start $VM_NAME > /dev/null 2>&1
   while [ true ]; do
-    if [[ $(isVMon $1) -eq 1 ]]; then break; fi
+    if [[ $(isVMon $VM_NAME) -eq 1 ]]; then break; fi
     sleep 1
   done
-  echo "$1 is on."
+  echo "$VM_NAME is on."
 }
 
-
-if [ -z "$1" ]; then echo "The first argument to this script should be the name of the VM you want to configure."
+if [ -z $2 ]; then
+  read -p "Enter the name of the VM you want to add an auto-runner to: " $VM_NAME
+  read -p "Enter your github PAT: " $PAT
 else
-  startVM $1
-  prlctl exec $1 "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_03_activate_auto_runner_setup.sh $2" 
+  VM_NAME=$1
+fi
+
+if [ -z "$VM_NAME" ]; then echo "The first argument to this script should be the name of the VM you want to configure."
+else
+  startVM $VM_NAME
+  prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_03_activate_auto_runner_setup.sh $PAT" 
 fi

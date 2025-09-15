@@ -1,25 +1,32 @@
 # The VM mounts the Home Directory of the Host automatically and can access the scripts stored there
+# arg1 VM_NAME
+if [[ -z $1 ]]; then
+  read -p "Enter the name of the VM you want to set up: " VM_NAME
+else
+  VM_NAME=$1
+fi
+
 SHARED_MARBLE_DIR="/Volumes/My\ Shared\ Files/Home/MARBLE"
 
 isVMon() {
-  prlctl list --no-header | grep $1 | wc -l
+  prlctl list --no-header | grep $VM_NAME | wc -l
 }
 
 startVM() {
-  prlctl start $1 > /dev/null 2>&1
+  prlctl start $VM_NAME > /dev/null 2>&1
   while [ true ]; do
-    if [[ $(isVMon $1) -eq 1 ]]; then break; fi
+    if [[ $(isVMon $VM_NAME) -eq 1 ]]; then break; fi
     sleep 1
   done
-  echo "$1 is on."
+  echo "$VM_NAME is on."
 }
 
 ssh-keygen -t ed25519 -f ~/.ssh/parallels_vm_key
 ssh-keygen -y -f ~/.ssh/parallels_vm_key > ~/.ssh/parallels_vm_key.pub
 
-if [ -z "$1" ]; then echo "The first argument to this script should be the name of the VM you want to configure."
+if [ -z "$VM_NAME" ]; then echo "The first argument to this script should be the name of the VM you want to configure."
 else
-  startVM $1
-  prlctl exec $1 "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_01_configure.sh $1" 
-  prlctl exec $1 "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_02_system_installs.sh $1" 
+  startVM $VM_NAME
+  prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_01_configure.sh $VM_NAME" 
+  prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_02_system_installs.sh $VM_NAME" 
 fi
