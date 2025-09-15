@@ -12,9 +12,6 @@ PURE_VM_NAME="$(echo "$STORAGE_VM_NAME" | cut -d'-' -f4-)"
 VM_NAME=$(scutil --get ComputerName)-$PURE_VM_NAME
 TEAM=$(echo "$PURE_VM_NAME" | cut -d'-' -f1)
 
-# Copy .s3cfg to user dir
-cp /Users/sftnight/MARBLE/.s3cfg /Users/sftnight
-
 # download, unzip, register, rename VM
 cd /Users/sftnight/Parallels
 /Users/sftnight/Library/Python/3.9/bin/s3cmd get -r s3://macvmstorage/$TEAM/$STORAGE_VM_NAME /Users/sftnight/Parallels/
