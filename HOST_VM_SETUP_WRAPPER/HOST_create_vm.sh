@@ -4,8 +4,8 @@ if [ -z "$2" ]; then
   read -p "Enter the full path to your ipsw image: " PATH_TO_IPSW
   read -p "Enter the desired name of the VM: " VM_NAME
 else
-  export PATH_TO_IPSW=$1
-  export VM_NAME=$2
+  PATH_TO_IPSW=$1
+  VM_NAME=$2
 fi
 echo $PATH_TO_IPSW
 echo $VM_NAME
@@ -28,7 +28,7 @@ prlctl start ${VM_NAME}
 
 # Set and print instrucion message
 # Due to limitations in Apple's Operating System and the CERN network, some setup steps could not be automated, the following message contains instructions to the maintainer on how to perform these steps manually.
-export MSG="
+MSG="
 After executing this script, the following steps must be performed manually: \n
 \t - Register the VM to the CERN network at https://landb.cern.ch/portal/devices/register \n
 \t\t  - mac-address: $(prlctl list -i ${VM_NAME} | grep net | sed -n 's/.*mac=\([^ ]*\).*/\1/p') \n
