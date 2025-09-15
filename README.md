@@ -33,6 +33,8 @@ Configure a VM host-mac (mandatory)
 7 Find and request Parallels Desktop in Self-Service.
 
 8 Download s3cmd python package for interaction with macVM bucket: https://openstack.cern.ch/project/containers/container/macvmstorage
+  python3 -m pip install s3cmd
+  scp macphsft41:/Users/sftnight/MARBLE/.s3cfg $HOST_NAME:/Users/sftnight/MARBLE
 
 9 Add a private ssh key so that jenkins' public key matches it. (This is horrible practice and we should change it)
 
