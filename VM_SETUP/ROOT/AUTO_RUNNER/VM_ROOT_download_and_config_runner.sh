@@ -1,4 +1,4 @@
-# PERSONAL ACCESS TOKEN - DO NOT UPLOAD THIS TO THE S3 OR GITHUB - REMOVE IT BEFORE DOING SO
+# READ PERSONAL ACCESS TOKEN - DO NOT UPLOAD .PAT ANYWHERE
 GH_PAT=$(cat /Users/sftnight/.PAT)
 
 # Run by the start.actions.runner.plist daemon every time the VM is launched to create a new ephemeral runner and register it to the ROOT CI. This requires the PAT stored in ~/.PAT. 
@@ -8,12 +8,13 @@ GH_OWNER="root-project"
 GH_REPO="root"
 RUNNER_NAME="$(scutil --get ComputerName)-$(date | tr ' :' '-')"
 PRIMARY_MAC_OS_VERSION="$(sw_vers --productVersion | sed -E 's/^([0-9]+).*/\1/')"
-RUNNER_LABELS="self-hosted,macOS-VM,mac${PRIMARY_MAC_OS_VERSION},arm64"
 
 # At the time of writing, macos26 is the beta version of macos - keep this up to date when the next beta comes
-if [[ ${PRIMARY_MAC_OS_VERSION}=="26" ]]; then 
+if [[ ${PRIMARY_MAC_OS_VERSION} == "26" ]]; then
   PRIMARY_MAC_OS_VERSION=beta
   RUNNER_LABELS="self-hosted,macOS-VM,mac-${PRIMARY_MAC_OS_VERSION},arm64"
+else
+  RUNNER_LABELS="self-hosted,macOS-VM,mac${PRIMARY_MAC_OS_VERSION},arm64"
 fi
 
 RUNNER_DIR="actions-runner"
