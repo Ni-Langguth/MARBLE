@@ -63,12 +63,15 @@ After executing this script, the following steps must be performed manually: \n
 \t\t - Sharing must be enabled (at the very bottom of the 'Sharing' settings page): \n
 \t\t\t  - Enable Remote Management (enable all sub-options of Remote-Management after clicking the little 'i' icon, do not set a password) \n
 \t\t\t  - Enable Remote Login (select 'All users', instead of 'Only these users') \n
+\t - .ipsw files are not always available for the latest macos version, check for updates BEFORE trying to install xcode or it will install the wrong version \n
 \n
 Once the registration of the network mac-address is finished: \n
 \t - restart the VM \n
 \t - run this line from the host-mac to confirm that the VM is ready to be sshed to: \n
 \t\t ssh $VM_NAME 'echo test' \n
-\t - check the spreadsheet for the correct version of xcode to install on that operating system at the moment.  \n
+\t - log into the GUI and run this next line from the host-mac to install xcode: \n
+\t\t ssh $VM_NAME 'xcode-select --install' \n
+\t - check the spreadsheet whether the correct version of xcode was installed for that OS version. \n
 \t - Use the sft Apple ID to download the correct version of xcode from https://developer.apple.com/download/all/ \n
 \t - log into the GUI and run this next line from the host-mac to install the parallels-toolbox: \n
 \t\t prlctl installtools $VM_NAME \n
