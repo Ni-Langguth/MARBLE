@@ -51,8 +51,8 @@ After executing this script, the following steps must be performed manually: \n
 \t\t  - opt out of IPV6, it can lead to problems \n
 \t\t  - log into the VMs GUI once, the reinstallation of Parallels Tools will start automatically after a moment, then require a restart \n
 \t\t  - once the VM is restarted, execute these two lines on the host: \n
-prlctl exec $VM_NAME "sudo scutil --set ComputerName $VM_NAME"
-prlctl exec $VM_NAME "sudo scutil --set HostName $VM_NAME"
+prlctl exec $VM_NAME "sudo scutil --set ComputerName $VM_NAME" \n
+prlctl exec $VM_NAME "sudo scutil --set HostName $VM_NAME" \n
 \t - Finally, if you want to set this VM up as a CI machine, look up README>Create a CI VM>Then add the VM to CI
 "
 echo $MSG
