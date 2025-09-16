@@ -5,6 +5,7 @@ startVM() {
   log "Starting $1."
   lockAllExcept $1
   prlctl start $1 > /dev/null 2>&1
+  sleep 5
   
   ATTEMPT=0
   while [[ "$(isVMon $1)" -eq 0 && $ATTEMPT -lt 10 ]]; do
@@ -12,8 +13,8 @@ startVM() {
     ATTEMPT=$(($ATTEMPT+1))
   done
   log "ATTEMPT=${ATTEMPT}"
-  if [[ $ATTEMPT -gt 10 ]]; then
-    exit
+  if [[ $ATTEMPT -gt 9 ]]; then
+    exec "$0"
   fi
   log "VM is on"
 
@@ -23,8 +24,8 @@ startVM() {
     ATTEMPT=$(($ATTEMPT+1))
   done
   log "ATTEMPT=${ATTEMPT}"   
-  if [[ $ATTEMPT -gt 10 ]]; then
-    exit
+  if [[ $ATTEMPT -gt 9 ]]; then
+    exec "$0"
   fi
   log "VM is reachable by ssh"
 
@@ -34,8 +35,8 @@ startVM() {
     ATTEMPT=$(($ATTEMPT+1))
   done
   log "ATTEMPT=${ATTEMPT}"   
-  if [[ $ATTEMPT -gt 10 ]]; then
-    exit
+  if [[ $ATTEMPT -gt 9 ]]; then
+    exec "$0"
   fi
   log "Runner ready."
 
