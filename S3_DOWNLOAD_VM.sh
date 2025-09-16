@@ -6,11 +6,22 @@ if [ -z $1 ]; then
 else
   STORAGE_VM_NAME=$1
 fi
-echo $STORAGE_VM_NAME
 
 PURE_VM_NAME="$(echo "$STORAGE_VM_NAME" | cut -d'-' -f4-)"
 VM_NAME=$(scutil --get ComputerName)-$PURE_VM_NAME
 TEAM=$(echo "$PURE_VM_NAME" | cut -d'-' -f1)
+
+# check whether $VM_NAME is already registered with Parallels on this host or exists in /Users/sftnight/Parallels
+if [ -d /Users/sftnight/Parallels/${VM_NAME}.macvm ]; then
+  echo "${VM_NAME}.macvm exists at /Users/sftnight/Parallels/${VM_NAME}.macvm Remove it to progress with download."
+  exit
+fi
+if [ $(prlctl list -a --no-header | grep $VM_NAME | wc -l) -eq 1 ]; then 
+  echo "$VM_NAME is already registered on this host. Unregister the VM to progress with download."
+  exit
+fi
+
+echo "Downloading $STORAGE_VM_NAME"
 
 # download, unzip, register, rename VM
 cd /Users/sftnight/Parallels
@@ -40,6 +51,13 @@ else
   rm -rf /Users/sftnight/Parallels/build_drive.hdd.zip
 fi
 
+# RENAME VM INTERNALLY
+prlctl start $VM_NAME
+sleep 15
+prlctl exec $VM_NAME "sudo scutil --set ComputerName $VM_NAME"
+prlctl exec $VM_NAME "sudo scutil --set HostName $VM_NAME"
+prlctl stop $VM_NAME --kill
+sleep 3
 # CLEAN UP VM ZIP
 rm -rf /Users/sftnight/Parallels/${STORAGE_VM_NAME}.zip
 
