@@ -1,35 +1,28 @@
-- Register the mac to the CERN network at network.cern.ch: \n
-  - mac-address: System Settings>Network>Ethernet>Details>Hardware>MAC address
-  - name: follow the naming scheme macphsft[0-99], avoid names which are already in use, which you can check in the spreadsheet link in the READ.ME
-  - opt out of IPV6, it can lead to problems
-
-- Go through apples setup assistant in the VMs GUI, selecting: \n
-  - Language: English \n
-  - Select your country or region: Switzerland \n
-  - Dictation (should be preset with region): English (United States) \n
-  - Input Sources (should be preset with region): U.S., Swiss German, Swiss French, Italian \n
-  - Preferred Languages (should be preset with region): English (US), German, French, Italian \n
-  - Migration Assistant / Transfer data to this mac: Not now / Set up as new \n
-  - Accessibility: Not Now \n
-  - Data & Privacy - Continue \n
-  - Create a Computer Account \n
-    - Full name: sftnight \n
-    - Account name: sftnight \n
-    - Password: (the usual one for root or SPI…) \n
-  - Sign In with Your Apple ID: Set up later \n
-  - Terms and Conditions: Agree \n
-  - Enable Location Services: continue without enabling \n
-   - Select your time zone: Geneva - Switzerland \n
-   - Analytics: disable/click off any boxes and continue \n
-   - Screen Time: Set up later \n  
-   - Siri: disable and continue \n
-   - Update mac automatically : continue \n
-   - The following settings must be configured manually: \n
-   - Lock Screen must be set to 'Never' in these three options: \n
-   - Start screen Saver when inactive : Never \n
-   - Turn display off when inactive : Never \n
-   - Require password after screen saver begins or display is turned off : Never \n
-   - Sharing must be enabled (at the very bottom of the 'Sharing' settings page): \n
-   - Enable Remote Management (enable all sub-options of Remote-Management after clicking the little 'i' icon, do not set a password) \n
-   - Enable Remote Login (select 'All users', instead of 'Only these users') \n
- 
+- Language: English
+- Select your country or region: Switzerland
+- Dictation (should be preset with region): English (United States)
+- Input Sources (should be preset with region): U.S., Swiss German, Swiss French, Italian
+- Preferred Languages (should be preset with region): English (US), German, French, Italian
+- Migration Assistant / Transfer data to this mac: Not now / Set up as new
+- Accessibility: Not Now
+- Data & Privacy - Continue
+- Create a Computer Account
+  - Full name: sftnight
+  - Account name: sftnight
+  - Password: (the usual one for root or SPI…)
+- Sign In with Your Apple ID: Set up later
+- Terms and Conditions: Agree
+- Enable Location Services: continue without enabling
+ - Select your time zone: Geneva - Switzerland
+ - Analytics: disable/click off any boxes and continue
+ - Screen Time: Set up later
+ - Siri: disable and continue
+ - Update mac automatically : continue
+ - The following settings must be configured manually:
+ - Lock Screen must be set to 'Never' in these three options:
+ - Start screen Saver when inactive : Never
+ - Turn display off when inactive : Never
+ - Require password after screen saver begins or display is turned off : Never
+ - Sharing must be enabled (at the very bottom of the 'Sharing' settings page):
+ - Enable Remote Management (enable all sub-options of Remote-Management after clicking the little 'i' icon, do not set a password)
+ - Enable Remote Login (select 'All users', instead of 'Only these users')
