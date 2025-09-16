@@ -21,15 +21,9 @@ startVM() {
     if [[ $(isVMon $VM_NAME) -eq 1 ]]; then break; fi
     sleep 1
   done
+  sleep 5
   echo "$VM_NAME is on."
 }
-
-if [ -z $2 ]; then
-  read -p "Enter the name of the VM you want to add an auto-runner to: " $VM_NAME
-  read -p "Enter your github PAT: " $PAT
-else
-  VM_NAME=$1
-fi
 
 if [ -z "$VM_NAME" ]; then echo "The first argument to this script should be the name of the VM you want to configure."
 else
