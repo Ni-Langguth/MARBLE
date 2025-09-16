@@ -1,22 +1,58 @@
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+trap '$DIR/.unlock_all_vms.sh; exit 130' INT
+
 startVM() {
   log "Starting $1."
   lockAllExcept $1
   prlctl start $1 > /dev/null 2>&1
+  
   ATTEMPT=0
-#  while [[ "$(isVMon $1)" -eq 0 || "$(pingSshVM $1)" -eq 0 || "$(isRunnerReady $1)" -eq 0 || ATTEMPT -lt 10 ]]; do
-  while [ true ]; do
-    if [[ "$(isVMon $1)" -eq 0 || "$(pingSshVM $1)" -eq 0 || "$(isRunnerReady $1)" -eq 0 || ATTEMPT -lt 10 ]]; then break; fi
-    ping $1 > /dev/null 2>&1
+  while [[ "$(isVMon $1)" -eq 0 && $ATTEMPT -lt 10 ]]; do
     sleep 1
-    ATTEMPT=ATTEMPT+1
+    ATTEMPT=$(($ATTEMPT+1))
   done
+  log "ATTEMPT=${ATTEMPT}"
+  if [[ $ATTEMPT -gt 10 ]]; then
+    exit
+  fi
+  log "VM is on"
+
+  ATTEMPT=0
+  while [[ "$(pingSshVM $1)" -eq 0 && $ATTEMPT -lt 10 ]]; do
+    sleep 1
+    ATTEMPT=$(($ATTEMPT+1))
+  done
+  log "ATTEMPT=${ATTEMPT}"   
+  if [[ $ATTEMPT -gt 10 ]]; then
+    exit
+  fi
+  log "VM is reachable by ssh"
+
+  ATTEMPT=0
+  while [[ "$(isRunnerReady $1)" -eq 0 && $ATTEMPT -lt 10 ]]; do
+    sleep 1
+    ATTEMPT=$(($ATTEMPT+1))
+  done
+  log "ATTEMPT=${ATTEMPT}"   
+  if [[ $ATTEMPT -gt 10 ]]; then
+    exit
+  fi
+  log "Runner ready."
+
+
+#  while [[ "$(isVMon $1)" -eq 0 || "$(pingSshVM $1)" -eq 0 || "$(isRunnerReady $1)" -eq 0 || ATTEMPT -lt 10 ]]; do
+#  while [ true ]; do
+#    if [[ "$(isVMon $1)" -eq 0 || "$(pingSshVM $1)" -eq 0 || "$(isRunnerReady $1)" -eq 1 || ATTEMPT -lt 10 ]]; then break; fi
+#    ping $1 > /dev/null 2>&1
+#    sleep 1
+#    ATTEMPT=ATTEMPT+1
+#  done
 #  while [[ "$(pingSshVM $1)" -eq 0 ]]; do
 #    sleep 1
 #  done
 #  while [[ "$(isRunnerReady $1)" -eq 0 ]]; do
 #    sleep 1
 #  done
-  log "Runner ready."
 }
 
 stopVM() {
@@ -37,13 +73,13 @@ stopAllVMs() {
 }
 
 lockAllExcept(){
-  for file in $PARALLELSFOLDER/*; do
-    if [[ "$file" != "$PARALLELSFOLDER/$1.macvm" && "$file" == *"macvm" ]]; then chflags uchg "$file"; fi
+  for file in $PARALLELS_DIR/*; do
+    if [[ "$file" != "$PARALLELS_DIR/$1.macvm" && "$file" == *"macvm" ]]; then chflags uchg "$file"; fi
   done
 }
  
 unlockAll() {
-  for file in $PARALLELSFOLDER/*; do
+  for file in $PARALLELS_DIR/*; do
     chflags nouchg "$file"
   done
 }
@@ -110,11 +146,11 @@ isRunnerReady() {
 log "Cycler started."
 
 remoteUser=sftnight
-PARALLELSFOLDER=/Users/sftnight/Parallels
+PARALLELS_DIR=/Users/sftnight/Parallels
 LAST_RUN_VM=
-log "listing root"
+#log "Listing root VMs."
 ALL_ROOT_VMS=($(listAllRootVMs))
-echo $ALL_ROOT_VMS
+#echo $ALL_ROOT_VMS
 
 log "picking"
 RANDOM_VM=$(pickRandomRootVM)
@@ -135,7 +171,7 @@ while true; do
     for RUNNING_VM in "${RUNNING_VMS[@]}"; do
       if [[ $RUNNING_VM == *ROOT* ]]; then
         if [[ "$(isVMGithubBusy $RUNNING_VM)" -eq 0 ]]; then
-          log "$RUNNING_VM is idle."
+          log "${RUNNING_VM}is idle."
           LAST_RUN_VM=$RUNNING_VM
           stopVM $RUNNING_VM
         else
@@ -150,7 +186,7 @@ while true; do
     log "No VMs on this host."
     startVM $RANDOM_VM
     LAST_RUN_VM=$RANDOM_VM
-    waitFor 150
+    waitFor 60
     log "Waiting period over on $RANDOM_VM! "
   fi
 done
