@@ -126,6 +126,9 @@ _____
   - If you are from SPI and want to work on an SPI mac
     - Remove the macXXarm label from the jenkins node you want to work on
     - Overview of jenkins mac-vm nodes: https://lcgapp-services.cern.ch/spi-jenkins/label/macVM/
+  IMPORTANT once you are done working on the CI host-mac:
+  - Launch 'vm_cycler.sh'
+  - If you removed the Jenkins label, return it
 
 Some useful prlctl commands
 -----
