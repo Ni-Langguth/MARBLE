@@ -137,6 +137,7 @@ LAST_RUN_VM=
 #log "Listing root VMs."
 ALL_ROOT_VMS=($(listAllRootVMs))
 #echo $ALL_ROOT_VMS
+BUSY_SINCE=
 
 log "picking"
 RANDOM_VM=$(pickRandomRootVM)
@@ -146,25 +147,32 @@ log "All VMs: $(listAllVMs)"
 log "All ROOT VMs: $(listAllRootVMs)"
 
 unlockAll
+
 while true; do
   while [[ "$RANDOM_VM" == "$LAST_RUN_VM" ]]; do
     RANDOM_VM=$(pickRandomRootVM)
   done
-#  if [[ "$(ps -ef | grep prlctl | grep -v 'grep')" == "" && $(lsof | grep macphsft | grep VM | grep macvm | wc -l) -gt 0 ]]; then
   if [[ $(lsof | grep macphsft | grep VM | grep macvm | wc -l) -gt 0 ]]; then
     RUNNING_VMS=$(listRunningVMs)
-    log "There is a running VM on this host: $RUNNING_VMS."
+    log "There is a running VM on this host: ${RUNNING_VMS}"
     for RUNNING_VM in "${RUNNING_VMS[@]}"; do
       if [[ $RUNNING_VM == *ROOT* ]]; then
         if [[ "$(isVMGithubBusy $RUNNING_VM)" -eq 0 ]]; then
           log "${RUNNING_VM}is idle."
           LAST_RUN_VM=$RUNNING_VM
           stopVM $RUNNING_VM
+          BUSY_SINCE=
         else
-          log "$RUNNING_VM is busy."
+          if [[ -z $BUSY_SINCE ]]; then
+            BUSY_SINCE=[$(date '+%Y-%m-%d %H:%M:%S')]
+            log "${RUNNING_VM}is busy"
+          else
+            printf "\033[1A\033[2K\033[1A\033[2K\033[1A\033[2K\033[1A\033[2K"
+            log "${RUNNING_VM}is busy since ${BUSY_SINCE}"
+          fi
         fi
       else
-        log "$RUNNING_VM is not a ROOT VM. The cycler will not interfere."
+        log "${RUNNING_VM}is not a ROOT VM. The cycler will not interfere."
       fi
     done
     waitFor 10
