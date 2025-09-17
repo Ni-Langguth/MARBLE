@@ -45,8 +45,8 @@ mkdir -p ${USER_DIR}/${RUNNER_DIR}
 tar xzf ${USER_DIR}/actions-runner-osx-arm64-${RUNNER_VERSION#v}.tar.gz -C ${USER_DIR}/${RUNNER_DIR}
 
 # Overwrite used runner with new ephemeral runner as per githubs recommendation (running a runner with --once is deprecated)
-sudo -u sftnight cd ${USER_DIR} && ./config.sh remove --token "${REG_TOKEN}"
-sudo -u sftnight cd ${USER_DIR} && ./config.sh --unattended \
+${USER_DIR}/${RUNNER_DIR}/config.sh remove --token "${REG_TOKEN}"
+${USER_DIR}/${RUNNER_DIR}/config.sh --unattended \
   --url https://github.com/${GH_OWNER}/${GH_REPO} \
   --token "${REG_TOKEN}" \
   --name  "${RUNNER_NAME}" \
@@ -57,8 +57,8 @@ sudo -u sftnight cd ${USER_DIR} && ./config.sh --unattended \
   --replace 
 rm -rf ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
 ln -s  /Volumes/build_drive/ROOT-macOS-${PRIMARY_MAC_OS_VERSION}/${WORK_DIR} ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
-sudo chown -R sftnight:staff ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
+#sudo chown -R sftnight:staff ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
 
 # Launch runner
-sudo -u sftnight cd $USER_DIR &&  ./run.sh
+$USER_DIR/${RUNNER_DIR}/run.sh
 
