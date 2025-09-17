@@ -39,21 +39,6 @@ startVM() {
     exec "$0"
   fi
   log "Runner ready."
-
-
-#  while [[ "$(isVMon $1)" -eq 0 || "$(pingSshVM $1)" -eq 0 || "$(isRunnerReady $1)" -eq 0 || ATTEMPT -lt 10 ]]; do
-#  while [ true ]; do
-#    if [[ "$(isVMon $1)" -eq 0 || "$(pingSshVM $1)" -eq 0 || "$(isRunnerReady $1)" -eq 1 || ATTEMPT -lt 10 ]]; then break; fi
-#    ping $1 > /dev/null 2>&1
-#    sleep 1
-#    ATTEMPT=ATTEMPT+1
-#  done
-#  while [[ "$(pingSshVM $1)" -eq 0 ]]; do
-#    sleep 1
-#  done
-#  while [[ "$(isRunnerReady $1)" -eq 0 ]]; do
-#    sleep 1
-#  done
 }
 
 stopVM() {
@@ -187,7 +172,7 @@ while true; do
     log "No VMs on this host."
     startVM $RANDOM_VM
     LAST_RUN_VM=$RANDOM_VM
-    waitFor 60
+    waitFor 120
     log "Waiting period over on $RANDOM_VM! "
   fi
 done
