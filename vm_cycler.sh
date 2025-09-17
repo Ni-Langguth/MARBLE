@@ -1,3 +1,22 @@
+#!/bin/bash
+
+LOGFILE=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --log)
+      LOGFILE="$2"
+      shift 2
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+if [[ -n "$LOGFILE" ]]; then
+  exec >>"$LOGFILE" 2>&1
+  echo "Logging enabled: $LOGFILE"
+fi
+
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 trap '$DIR/.unlock_all_vms.sh; exit 130' INT
 
@@ -109,14 +128,15 @@ pickRandomRootVM() {
 }
 
 waitFor() {
-#  VM_NAME="$1"
   TIMER="$1"
   log "Waiting for $TIMER seconds."
   for ((i=1; i<=TIMER; i++)); do
-    filled=$(printf "%${i}s" | tr ' ' '#')
-    empty=$(printf "%$((TIMER - i))s")
-    printf "\r[%s%s] %3ds" "$filled" "$empty" "$i"
-    sleep 1
+    if [ -t 0 ]; then
+      filled=$(printf "%${i}s" | tr ' ' '#')
+      empty=$(printf "%$((TIMER - i))s")
+      printf "\r[%s%s] %3ds" "$filled" "$empty" "$i"
+    fi
+      sleep 1
   done
   echo
 }
@@ -134,7 +154,6 @@ log "Cycler started."
 remoteUser=sftnight
 PARALLELS_DIR=/Users/sftnight/Parallels
 LAST_RUN_VM=
-#log "Listing root VMs."
 ALL_ROOT_VMS=($(listAllRootVMs))
 #echo $ALL_ROOT_VMS
 BUSY_SINCE=
