@@ -2,3 +2,5 @@
 .s3cfg
 # Ignore files beginning with 'test'
 test*
+# Ignore all log files
+*.log
