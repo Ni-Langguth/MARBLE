@@ -10,8 +10,9 @@ Instructions in this readme contain:
  - Upload a VM to the S3 bucket
  - Download a VM from the S3 bucket
  - Some useful prlctl commands
+ - How to debug a problem
 
-Configure a VM host-mac (mandatory)
+Configure a VM host-mac (prerequisite)
 -----
 1 Setup assistant
   Follow setup_assistant.txt  
@@ -43,14 +44,14 @@ Configure a VM host-mac (mandatory)
   python3 -m pip install s3cmd
   scp macphsft41:/Users/sftnight/MARBLE/.s3cfg $HOST_NAME:/Users/sftnight/MARBLE
 
-10 Add a private ssh key so that jenkins' public key matches it. (This is horrible practice and we should change it)
+10 Pull this repo to the home directory of your user /Users/sftnight. It has to be this directory for the execution of the scripts on the VM to work.
 
-11 Pull this repo to the home directory of your user /Users/sftnight. It has to be this directory for the execution of the scripts on the VM to work.
-
-12 Disable indexing on the whole mac to save computing ressources.
+11 Disable indexing on the whole mac to save computing ressources.
    sudo mdutil -i off /
    Check whether indexing is actually off.
    mdutil -s /
+
+(Add a private ssh key so that jenkins' public key matches it. (This is horrible practice and we should change it))
 
 Create a CI VM
 -----
@@ -101,9 +102,9 @@ Download a VM from an S3 bucket
 
 2 Read the print from executing this script and follow the instructions in it to do those things manually, which I was unable to automate.
 
-3 (optional) If you want to add this VM to the CI pool for ROOT or SPI, follow the respective instruction sets, printed by the script and enter the new host to the excel sheet.
+3 (optional) If you want to add this VM to the CI pool for ROOT or SPI, follow the respective instruction sets, printed by the script and enter the new host-mac to the excel sheet.
 
-Offer VMs to CI services (to be clear: you can offer both kinds of VMs on the same host)
+Offer VMs to CI services (to be clear: you can offer both kinds of VMs on the same host-mac)
   For ROOT: 
     1 Start the vm_cycler.sh on the host-mac 
     2 Double-check that you executed optional step 4 in "Create a VM" and actually bootstrapped the runner.plist
@@ -113,15 +114,26 @@ Offer VMs to CI services (to be clear: you can offer both kinds of VMs on the sa
     3 Double-check the labels, they should include 'macVM' and 'mac[0-99]arm'. Make sure the correct version is specified on each node.
     4 Double-check that you executed optional step 4 in "Create a VM" and actually bootstrapped the timeout.plist
 
+How to debug a problem
+_____
+1 On your mac
+  - Get Parallels: follow steps 6-10 of 'Configure a VM host-mac'
+  - Follow 'Download a VM from an S3 bucket'
+
+2 On a CI host-mac
+  - Disable the vm_cycler.sh to stop cycling the VMs
+  - Lock all other VMs from starting by executing 'LOCK_ALL_EXCEPT.sh $VM_NAME' where VM_NAME is the mac you want to work on.
+  - If you are from SPI and want to work on an SPI mac
+    - Remove the macXXarm label from the jenkins node you want to work on
+    - Overview of jenkins mac-vm nodes: https://lcgapp-services.cern.ch/spi-jenkins/label/macVM/
+
 Some useful prlctl commands
 -----
 1 To start a VM
 prlctl start $VM_NAME
 
 2 To stop a VM
-prlctl stop $VM_NAME
-or
-prlctl stop $VM_NAME --kill
+prlctl stop $VM_NAME or prlctl stop $VM_NAME --kill
 
 3 To list all VMs on a host
 prlctl list -a
