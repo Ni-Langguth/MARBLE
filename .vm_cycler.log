@@ -1,0 +1,304 @@
+Logging enabled: /Users/sftnight/MARBLE/.vm_cycler.log
+[2025-09-17 16:17:26] Cycler started.
+[2025-09-17 16:17:26] picking
+[2025-09-17 16:17:26] picked macphsft32-ROOT-VM-macOS-26
+[2025-09-17 16:17:26] listing all
+[2025-09-17 16:17:26] All VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-17 16:17:26] All ROOT VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-17 16:17:26] There is a running VM on this host: macphsft32-ROOT-VM-macOS-26 
+[2025-09-17 16:17:26] macphsft32-ROOT-VM-macOS-26 is idle.
+[2025-09-17 16:17:26] Stopping macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:17:29] Waiting for 10 seconds.
+
+[2025-09-17 16:17:39] No VMs on this host.
+[2025-09-17 16:17:39] Starting macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:17:44] ATTEMPT=0
+[2025-09-17 16:17:44] VM is on
+[2025-09-17 16:17:46] ATTEMPT=0
+[2025-09-17 16:17:46] VM is reachable by ssh
+[2025-09-17 16:17:48] ATTEMPT=1
+[2025-09-17 16:17:48] Runner ready.
+[2025-09-17 16:17:48] Waiting for 120 seconds.
+
+[2025-09-17 16:19:49] Waiting period over on macphsft32-ROOT-VM-macOS-26! 
+[2025-09-17 16:19:49] There is a running VM on this host: macphsft32-ROOT-VM-macOS-26 
+[2025-09-17 16:19:49] macphsft32-ROOT-VM-macOS-26 is idle.
+[2025-09-17 16:19:49] Stopping macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:19:55] Waiting for 10 seconds.
+
+[2025-09-17 16:20:05] No VMs on this host.
+[2025-09-17 16:20:05] Starting macphsft32-ROOT-VM-macOS-15.
+[2025-09-17 16:20:11] ATTEMPT=0
+[2025-09-17 16:20:11] VM is on
+[2025-09-17 16:20:12] ATTEMPT=0
+[2025-09-17 16:20:12] VM is reachable by ssh
+[2025-09-17 16:20:18] ATTEMPT=5
+[2025-09-17 16:20:18] Runner ready.
+[2025-09-17 16:20:18] Waiting for 120 seconds.
+
+[2025-09-17 16:22:20] Waiting period over on macphsft32-ROOT-VM-macOS-15! 
+[2025-09-17 16:22:20] There is a running VM on this host: macphsft32-ROOT-VM-macOS-15 
+[2025-09-17 16:22:20] macphsft32-ROOT-VM-macOS-15 is idle.
+[2025-09-17 16:22:20] Stopping macphsft32-ROOT-VM-macOS-15.
+[2025-09-17 16:22:21] Waiting for 10 seconds.
+
+[2025-09-17 16:22:31] No VMs on this host.
+[2025-09-17 16:22:31] Starting macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:22:36] ATTEMPT=0
+[2025-09-17 16:22:36] VM is on
+[2025-09-17 16:22:39] ATTEMPT=0
+[2025-09-17 16:22:39] VM is reachable by ssh
+[2025-09-17 16:22:39] ATTEMPT=0
+[2025-09-17 16:22:39] Runner ready.
+[2025-09-17 16:22:39] Waiting for 120 seconds.
+
+[2025-09-17 16:24:40] Waiting period over on macphsft32-ROOT-VM-macOS-26! 
+[2025-09-17 16:24:41] There is a running VM on this host: macphsft32-ROOT-VM-macOS-26 
+[2025-09-17 16:24:41] macphsft32-ROOT-VM-macOS-26 is idle.
+[2025-09-17 16:24:41] Stopping macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:24:43] Waiting for 10 seconds.
+
+[2025-09-17 16:24:54] No VMs on this host.
+[2025-09-17 16:24:54] Starting macphsft32-ROOT-VM-macOS-13.
+[2025-09-17 16:25:01] ATTEMPT=0
+[2025-09-17 16:25:01] VM is on
+[2025-09-17 16:25:02] ATTEMPT=0
+[2025-09-17 16:25:02] VM is reachable by ssh
+[2025-09-17 16:25:11] ATTEMPT=7
+[2025-09-17 16:25:11] Runner ready.
+[2025-09-17 16:25:11] Waiting for 120 seconds.
+
+[2025-09-17 16:27:13] Waiting period over on macphsft32-ROOT-VM-macOS-13! 
+[2025-09-17 16:27:13] There is a running VM on this host: macphsft32-ROOT-VM-macOS-13 
+[2025-09-17 16:27:13] macphsft32-ROOT-VM-macOS-13 is idle.
+[2025-09-17 16:27:13] Stopping macphsft32-ROOT-VM-macOS-13.
+[2025-09-17 16:27:16] Waiting for 10 seconds.
+
+[2025-09-17 16:27:26] No VMs on this host.
+[2025-09-17 16:27:26] Starting macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:27:31] ATTEMPT=0
+[2025-09-17 16:27:31] VM is on
+[2025-09-17 16:27:33] ATTEMPT=0
+[2025-09-17 16:27:33] VM is reachable by ssh
+[2025-09-17 16:27:34] ATTEMPT=1
+[2025-09-17 16:27:34] Runner ready.
+[2025-09-17 16:27:34] Waiting for 120 seconds.
+
+[2025-09-17 16:29:36] Waiting period over on macphsft32-ROOT-VM-macOS-26! 
+[2025-09-17 16:29:36] There is a running VM on this host: macphsft32-ROOT-VM-macOS-26 
+[2025-09-17 16:29:36] macphsft32-ROOT-VM-macOS-26 is idle.
+[2025-09-17 16:29:36] Stopping macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:29:37] Waiting for 10 seconds.
+
+[2025-09-17 16:29:47] No VMs on this host.
+[2025-09-17 16:29:47] Starting macphsft32-ROOT-VM-macOS-13.
+[2025-09-17 16:29:56] ATTEMPT=0
+[2025-09-17 16:29:56] VM is on
+[2025-09-17 16:29:57] ATTEMPT=0
+[2025-09-17 16:29:57] VM is reachable by ssh
+[2025-09-17 16:30:04] ATTEMPT=6
+[2025-09-17 16:30:04] Runner ready.
+[2025-09-17 16:30:04] Waiting for 120 seconds.
+
+[2025-09-17 16:32:06] Waiting period over on macphsft32-ROOT-VM-macOS-13! 
+[2025-09-17 16:32:06] There is a running VM on this host: macphsft32-ROOT-VM-macOS-13 
+[2025-09-17 16:32:06] macphsft32-ROOT-VM-macOS-13 is idle.
+[2025-09-17 16:32:06] Stopping macphsft32-ROOT-VM-macOS-13.
+[2025-09-17 16:32:10] Waiting for 10 seconds.
+
+[2025-09-17 16:32:20] No VMs on this host.
+[2025-09-17 16:32:20] Starting macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:32:30] ATTEMPT=0
+[2025-09-17 16:32:30] VM is on
+[2025-09-17 16:32:31] ATTEMPT=0
+[2025-09-17 16:32:31] VM is reachable by ssh
+[2025-09-17 16:32:33] ATTEMPT=1
+[2025-09-17 16:32:33] Runner ready.
+[2025-09-17 16:32:33] Waiting for 120 seconds.
+
+[2025-09-17 16:34:34] Waiting period over on macphsft32-ROOT-VM-macOS-26! 
+[2025-09-17 16:34:35] There is a running VM on this host: macphsft32-ROOT-VM-macOS-26 
+[2025-09-17 16:34:35] macphsft32-ROOT-VM-macOS-26 is idle.
+[2025-09-17 16:34:35] Stopping macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:34:38] Waiting for 10 seconds.
+
+[2025-09-17 16:34:49] No VMs on this host.
+[2025-09-17 16:34:49] Starting macphsft32-ROOT-VM-macOS-15.
+[2025-09-17 16:34:55] ATTEMPT=0
+[2025-09-17 16:34:55] VM is on
+[2025-09-17 16:34:57] ATTEMPT=0
+[2025-09-17 16:34:57] VM is reachable by ssh
+[2025-09-17 16:35:03] ATTEMPT=5
+[2025-09-17 16:35:03] Runner ready.
+[2025-09-17 16:35:03] Waiting for 120 seconds.
+
+[2025-09-17 16:37:04] Waiting period over on macphsft32-ROOT-VM-macOS-15! 
+[2025-09-17 16:37:05] There is a running VM on this host: macphsft32-ROOT-VM-macOS-15 
+[2025-09-17 16:37:05] macphsft32-ROOT-VM-macOS-15 is idle.
+[2025-09-17 16:37:05] Stopping macphsft32-ROOT-VM-macOS-15.
+[2025-09-17 16:37:07] Waiting for 10 seconds.
+
+[2025-09-17 16:37:18] No VMs on this host.
+[2025-09-17 16:37:18] Starting macphsft32-ROOT-VM-macOS-26.
+[2025-09-17 16:37:26] ATTEMPT=0
+[2025-09-17 16:37:26] VM is on
+[2025-09-17 16:37:28] ATTEMPT=0
+[2025-09-17 16:37:28] VM is reachable by ssh
+[2025-09-17 16:37:29] ATTEMPT=1
+[2025-09-17 16:37:29] Runner ready.
+[2025-09-17 16:37:29] Waiting for 120 seconds.
+Logging enabled: /Users/sftnight/MARBLE/.vm_cycler.log
+[2025-09-18 09:06:51] Cycler started.
+[2025-09-18 09:06:51] picking
+[2025-09-18 09:06:51] picked macphsft32-ROOT-VM-macOS-13
+[2025-09-18 09:06:51] listing all
+[2025-09-18 09:06:51] All VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:06:51] All ROOT VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:06:51] No VMs on this host.
+[2025-09-18 09:06:51] Starting macphsft32-ROOT-VM-macOS-13.
+[2025-09-18 09:06:57] ATTEMPT=0
+[2025-09-18 09:06:57] VM is on
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+[2025-09-18 09:07:07] ATTEMPT=10
+[2025-09-18 09:07:07] Cycler started.
+[2025-09-18 09:07:07] picking
+[2025-09-18 09:07:07] picked macphsft32-ROOT-VM-macOS-13
+[2025-09-18 09:07:07] listing all
+[2025-09-18 09:07:07] All VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:07:07] All ROOT VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:07:08] There is a running VM on this host: macphsft32-ROOT-VM-macOS-13 
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+[2025-09-18 09:07:08] macphsft32-ROOT-VM-macOS-13 is idle.
+[2025-09-18 09:07:08] Stopping macphsft32-ROOT-VM-macOS-13.
+[2025-09-18 09:07:08] Waiting for 10 seconds.
+
+[2025-09-18 09:07:18] No VMs on this host.
+[2025-09-18 09:07:18] Starting macphsft32-ROOT-VM-macOS-13.
+[2025-09-18 09:07:24] ATTEMPT=0
+[2025-09-18 09:07:24] VM is on
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+[2025-09-18 09:07:34] ATTEMPT=10
+[2025-09-18 09:07:34] Cycler started.
+[2025-09-18 09:07:34] picking
+[2025-09-18 09:07:34] picked macphsft32-ROOT-VM-macOS-13
+[2025-09-18 09:07:34] listing all
+[2025-09-18 09:07:34] All VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:07:34] All ROOT VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:07:34] There is a running VM on this host: macphsft32-ROOT-VM-macOS-13 
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+[2025-09-18 09:07:34] macphsft32-ROOT-VM-macOS-13 is idle.
+[2025-09-18 09:07:34] Stopping macphsft32-ROOT-VM-macOS-13.
+[2025-09-18 09:07:35] Waiting for 10 seconds.
+
+[2025-09-18 09:07:45] No VMs on this host.
+[2025-09-18 09:07:45] Starting macphsft32-ROOT-VM-macOS-13.
+[2025-09-18 09:07:50] ATTEMPT=0
+[2025-09-18 09:07:50] VM is on
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+[2025-09-18 09:08:01] ATTEMPT=10
+[2025-09-18 09:08:01] Cycler started.
+[2025-09-18 09:08:01] picking
+[2025-09-18 09:08:01] picked macphsft32-ROOT-VM-macOS-13
+[2025-09-18 09:08:01] listing all
+[2025-09-18 09:08:01] All VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:08:01] All ROOT VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:08:01] There is a running VM on this host: macphsft32-ROOT-VM-macOS-13 
+ssh: Could not resolve hostname macphsft32-root-vm-macos-13: nodename nor servname provided, or not known
+[2025-09-18 09:08:01] macphsft32-ROOT-VM-macOS-13 is idle.
+[2025-09-18 09:08:01] Stopping macphsft32-ROOT-VM-macOS-13.
+[2025-09-18 09:08:02] Waiting for 10 seconds.
+
+[2025-09-18 09:08:12] No VMs on this host.
+[2025-09-18 09:08:12] Starting macphsft32-ROOT-VM-macOS-13.
+[2025-09-18 09:08:17] ATTEMPT=0
+[2025-09-18 09:08:17] VM is on
+[2025-09-18 09:08:19] ATTEMPT=0
+[2025-09-18 09:08:19] VM is reachable by ssh
+[2025-09-18 09:08:26] ATTEMPT=6
+[2025-09-18 09:08:26] Runner ready.
+[2025-09-18 09:08:26] Waiting for 120 seconds.
+
+[2025-09-18 09:10:28] Waiting period over on macphsft32-ROOT-VM-macOS-13! 
+[2025-09-18 09:10:28] There is a running VM on this host: macphsft32-ROOT-VM-macOS-13 
+[2025-09-18 09:10:28] macphsft32-ROOT-VM-macOS-13 is idle.
+[2025-09-18 09:10:28] Stopping macphsft32-ROOT-VM-macOS-13.
+[2025-09-18 09:10:29] Waiting for 10 seconds.
+
+[2025-09-18 09:10:39] No VMs on this host.
+[2025-09-18 09:10:39] Starting macphsft32-ROOT-VM-macOS-26.
+[2025-09-18 09:10:44] ATTEMPT=0
+[2025-09-18 09:10:44] VM is on
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+[2025-09-18 09:10:55] ATTEMPT=10
+[2025-09-18 09:10:55] Cycler started.
+[2025-09-18 09:10:55] picking
+[2025-09-18 09:10:55] picked macphsft32-ROOT-VM-macOS-26
+[2025-09-18 09:10:55] listing all
+[2025-09-18 09:10:55] All VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:10:55] All ROOT VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:10:55] There is a running VM on this host: macphsft32-ROOT-VM-macOS-26 
+ssh: Could not resolve hostname macphsft32-root-vm-macos-26: nodename nor servname provided, or not known
+[2025-09-18 09:10:55] macphsft32-ROOT-VM-macOS-26 is idle.
+[2025-09-18 09:10:55] Stopping macphsft32-ROOT-VM-macOS-26.
+[2025-09-18 09:10:57] Waiting for 10 seconds.
+Logging enabled: /Users/sftnight/MARBLE/.vm_cycler.log
+[2025-09-18 09:13:59] Cycler started.
+[2025-09-18 09:13:59] picking
+[2025-09-18 09:13:59] picked macphsft32-ROOT-VM-macOS-26
+[2025-09-18 09:13:59] listing all
+[2025-09-18 09:13:59] All VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:13:59] All ROOT VMs: macphsft32-ROOT-VM-macOS-13 macphsft32-ROOT-VM-macOS-15 macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:14:00] There is a running VM on this host: macphsft32-ROOT-VM-macOS-26 
+[2025-09-18 09:14:00] macphsft32-ROOT-VM-macOS-26 is idle.
+[2025-09-18 09:14:00] Stopping macphsft32-ROOT-VM-macOS-26.
+[2025-09-18 09:14:00] Waiting for 10 seconds.
+
+[2025-09-18 09:14:11] No VMs on this host.
+[2025-09-18 09:14:11] Starting macphsft32-ROOT-VM-macOS-26.
+[2025-09-18 09:14:16] ATTEMPT=0
+[2025-09-18 09:14:16] VM is on
+[2025-09-18 09:14:17] ATTEMPT=0
+[2025-09-18 09:14:17] VM is reachable by ssh
+[2025-09-18 09:14:19] ATTEMPT=1
+[2025-09-18 09:14:19] Runner ready.
+[2025-09-18 09:14:19] Waiting for 120 seconds.

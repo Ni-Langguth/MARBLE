@@ -14,9 +14,9 @@ GH_PAT=$(cat ${USER_DIR}/.PAT)
 
 # If the runner tarball on the VM differs from githubs latest version, update it
 RUNNER_VERSION=$(curl -s https://api.github.com/repos/actions/runner/releases/latest | sed -n 's/.*"tag_name": *"v\([^"]*\)".*/\1/p')
-CURRENT_RUNNER_VERSION=$(ls actions-runner-osx-arm64-*.tar.gz | sed -E 's/.*osx-arm64-([0-9.]+)\.tar\.gz/\1/')
+CURRENT_RUNNER_VERSION=$(ls ${USER_DIR}/actions-runner-osx-arm64-*.tar.gz | sed -E 's/.*osx-arm64-([0-9.]+)\.tar\.gz/\1/')
 if [[ "$RUNNER_VERSION" != "$CURRENT_RUNNER_VERSION" ]]; then
-  curl -o actions-runner-osx-arm64-${RUNNER_VERSION#v}.tar.gz -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-osx-arm64-${RUNNER_VERSION#v}.tar.gz
+  curl -o ${USER_DIR}/actions-runner-osx-arm64-${RUNNER_VERSION#v}.tar.gz -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-osx-arm64-${RUNNER_VERSION#v}.tar.gz
 fi
 
 # At the time of writing, macos26 is the beta version of macos - keep this up to date when the next beta comes
@@ -36,10 +36,7 @@ REG_TOKEN=$(
     https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/runners/registration-token |  sed -n 's/.*"token": *"\([^"]*\)".*/\1/p'
 )
 
-#cd $USER_DIR
 mkdir -p ${USER_DIR}/${RUNNER_DIR}
-#sudo chown sftnight:staff ${USER_DIR}/${RUNNER_DIR}
-#cd ${USER_DIR}/${RUNNER_DIR}
 
 # Unpack runner tarball
 tar xzf ${USER_DIR}/actions-runner-osx-arm64-${RUNNER_VERSION#v}.tar.gz -C ${USER_DIR}/${RUNNER_DIR}
