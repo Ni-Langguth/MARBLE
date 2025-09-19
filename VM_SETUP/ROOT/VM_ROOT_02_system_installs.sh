@@ -21,9 +21,6 @@ install_gfortran(){
   curl -O -L https://github.com/fxcoudert/gfortran-for-macOS/releases/download/$STRING1/$STRING2.dmg
   hdiutil attach $STRING2.dmg
   sudo installer -pkg /Volumes/$STRING2/gfortran.pkg -target /
-#    curl -O -L https://github.com/fxcoudert/gfortran-for-macOS/releases/download/${GFORTRAN_VERSION}-${macos_vers}/gfortran-${GFORTRAN_VERSION}-ARM-${Macos_Vers}.dmg
-#    hdiutil attach gfortran-${GFORTRAN_VERSION}-ARM-${Macos_Vers}.dmg
-#    sudo installer -pkg /Volumes/gfortran-${GFORTRAN_VERSION}-ARM-${Macos_Vers}/gfortran.pkg -target /
   sudo mkdir -p /usr/local/lib
   cd /usr/local/lib
   sudo ln -s ../gfortran/lib/libgfortran.5.dylib

@@ -22,7 +22,7 @@ startVM() {
 }
 
 ssh-keygen -t ed25519 -f ~/.ssh/parallels_vm_key
-ssh-keygen -y -f ~/.ssh/parallels_vm_key > ~/.ssh/parallels_vm_key.pub
+ssh-keygen -y -f ~/.ssh/parallels_vm_key >> ~/.ssh/authorized_keys
 
 if [ -z "$VM_NAME" ]; then echo "The first argument to this script should be the name of the VM you want to configure."
 else
