@@ -3,19 +3,6 @@ if [ -z "$1" ]; then
 else
   CURRENT_VM_NAME=$1
 fi
-HOST_NAME=$(scutil --get ComputerName)
-PURE_VM_NAME="${CURRENT_VM_NAME#${HOST_NAME}-}"
-STORAGE_VM_NAME="$(date +%F)-$PURE_VM_NAME"
-TEAM=$(echo "$PURE_VM_NAME" | cut -d'-' -f1)
-USER_DIR=/Users/sftnight
-PARALLELS_DIR=$USER_DIR/Parallels
-S3_BUCKET=s3://macvmstorage
-
-if [ -z "$1" ]; then
-  read -p "Enter the name of the VM you want to upload: " CURRENT_VM_NAME
-else
-  CURRENT_VM_NAME=$1
-fi
 
 HOST_NAME=$(scutil --get ComputerName)
 PURE_VM_NAME="${CURRENT_VM_NAME#${HOST_NAME}-}"
@@ -41,11 +28,13 @@ if [ -d $STORAGE_VM_NAME ]; then
   rm -rf $PARALLELS_DIR/$STORAGE_VM_NAME.macvm
 fi
 
-# REMOVE PAT FROM ORIGINAL AND RESET ITS ZSH HISTORY TO STRIP IT FROM SECRETS
-PAT=$(prlctl exec $CURRENT_VM_NAME "cat /Users/sftnight/.PAT")
-echo $PAT
-prlctl exec $CURRENT_VM_NAME "sudo rm /Users/sftnight/.PAT"
-prlctl exec $CURRENT_VM_NAME "if [ -f /Users/sftnight/.PAT ]; then echo '.PAT still exists'; else echo '.PAT was removed successfully'; fi"
+# REMOVE PAT FROM ORIGINAL
+if [[ ${TEAM} == "ROOT"  ]]; then
+  PAT=$(prlctl exec $CURRENT_VM_NAME "cat /Users/sftnight/.PAT")
+  prlctl exec $CURRENT_VM_NAME "sudo rm /Users/sftnight/.PAT"
+  prlctl exec $CURRENT_VM_NAME "if [ -f /Users/sftnight/.PAT ]; then echo '.PAT still exists'; else echo '.PAT was removed successfully'; fi"
+fi
+
 # CLEAR ZSH_HISTORY
 prlctl exec $CURRENT_VM_NAME "rm /Users/sftnight/.zsh_history && touch /Users/sftnight/.zsh_history && chmod 600 /Users/sftnight/.zsh_history && sudo chown sftnight:staff /Users/sftnight/.zsh_history"
 prlctl exec $CURRENT_VM_NAME "sudo scutil --set ComputerName $STORAGE_VM_NAME"
@@ -53,8 +42,8 @@ prlctl exec $CURRENT_VM_NAME "sudo scutil --set HostName $STORAGE_VM_NAME"
 prlctl exec $CURRENT_VM_NAME "sudo scutil --get ComputerName"
 prlctl exec $CURRENT_VM_NAME "sudo scutil --get HostName"
 sleep 1
-prlctl stop $CURRENT_VM_NAME
-sleep 10
+prlctl stop $CURRENT_VM_NAME --kill
+sleep 5
 
 # CREATE CLONE WITHOUT PAT
 prlctl clone "$CURRENT_VM_NAME" --name "$STORAGE_VM_NAME"
@@ -62,8 +51,10 @@ prlctl clone "$CURRENT_VM_NAME" --name "$STORAGE_VM_NAME"
 # PUT PAT BACK ON ORIGINAL AND CHANGE NAMES BACK
 prlctl start $CURRENT_VM_NAME
 sleep 20
-prlctl exec $CURRENT_VM_NAME "echo $PAT > /Users/sftnight/.PAT"
-prlctl exec $CURRENT_VM_NAME "if [ -f /Users/sftnight/.PAT ]; then echo '.PAT was replaced successfully'; else echo '.PAT is missing from original'; fi"
+if [[ ${TEAM} == "ROOT"  ]]; then
+  prlctl exec $CURRENT_VM_NAME "echo $PAT > /Users/sftnight/.PAT"
+  prlctl exec $CURRENT_VM_NAME "if [ -f /Users/sftnight/.PAT ]; then echo '.PAT was replaced successfully'; else echo '.PAT is missing from original'; fi"
+fi
 # RENAME VM
 prlctl exec $CURRENT_VM_NAME "sudo scutil --set ComputerName $CURRENT_VM_NAME"
 prlctl exec $CURRENT_VM_NAME "sudo scutil --set HostName $CURRENT_VM_NAME"
@@ -90,7 +81,7 @@ while [[ ! -z "$SNAPSHOTS" ]]; do
 done
 
 # Zip clone
-zip -r /Users/sftnight/Parallels/"$STORAGE_VM_NAME".zip /Users/sftnight/Parallels/"$STORAGE_VM_NAME".macvm
+cd /Users/sftnight/Parallels && zip -r "$STORAGE_VM_NAME".zip "$STORAGE_VM_NAME".macvm
 
 prlctl unregister $STORAGE_VM_NAME
 rm -rf /Users/sftnight/Parallels/"$STORAGE_VM_NAME".macvm
