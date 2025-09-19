@@ -97,6 +97,10 @@ isVMGithubBusy() {
   echo $(sshOnVM $1 "pgrep -f 'Runner.Worker' >/dev/null 2>&1 && echo 1 || echo 0") 
 }
 
+isVMJenkinsBusy() {
+  echo $(sshOnVM $1 "ps -ef | grep jenkins | grep -v 'grep' >/dev/null 2>&1 && echo 1 || echo 0")
+}
+
 pingSshVM() {
   sshOnVM $1 "echo ping >/dev/null 2>&1 && echo 1 || echo 0"
 }
@@ -175,8 +179,10 @@ while true; do
     RUNNING_VMS=$(listRunningVMs)
     log "There is a running VM on this host: ${RUNNING_VMS}"
     for RUNNING_VM in "${RUNNING_VMS[@]}"; do
-      if [[ $RUNNING_VM == *ROOT* ]]; then
-        if [[ "$(isVMGithubBusy $RUNNING_VM)" -eq 0 ]]; then
+#      if [[ $RUNNING_VM == *ROOT* ]]; then
+
+#        if [[ "$(isVMGithubBusy $RUNNING_VM)" -eq 0 ]]; then
+        if [[ "$(isVMJenkinsBusy $RUNNING_VM)" -eq 0 && "$(isVMGithubBusy $RUNNING_VM)" -eq 0 ]]; then
           log "${RUNNING_VM}is idle."
           LAST_RUN_VM=$RUNNING_VM
           stopVM $RUNNING_VM
@@ -190,11 +196,12 @@ while true; do
             log "${RUNNING_VM}is busy since ${BUSY_SINCE}"
           fi
         fi
-      else
-        log "${RUNNING_VM}is not a ROOT VM. The cycler will not interfere."
-      fi
+
+#      else
+#        log "${RUNNING_VM}is not a ROOT VM. The cycler will not interfere."
+#      fi
     done
-    waitFor 10
+    waitFor 120
   else 
     log "No VMs on this host."
     startVM $RANDOM_VM
