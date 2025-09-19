@@ -9,8 +9,9 @@ Instructions in this readme contain:
  - Add a VM to CI
  - Upload a VM to the S3 bucket
  - Download a VM from the S3 bucket
- - Some useful prlctl commands
  - How to debug a problem
+ - Some useful prlctl commands
+ - Some common problems
 
 Configure a VM host-mac (prerequisite)
 -----
@@ -115,7 +116,7 @@ Offer VMs to CI services (to be clear: you can offer both kinds of VMs on the sa
     4 Double-check that you executed optional step 4 in "Create a VM" and actually bootstrapped the timeout.plist
 
 How to debug a problem
-_____
+-----
 1 On your mac
   - Get Parallels: follow steps 6-10 of 'Configure a VM host-mac'
   - Follow 'Download a VM from an S3 bucket'
@@ -149,3 +150,11 @@ prlctl exec $VM_NAME "$COMMAND"
 
 6 All prlctl commands are documented here as well
 https://download.parallels.com/desktop/v20/docs/en_US/Parallels%20Desktop%20Command-Line%20Reference.pdf
+
+Some common problems
+-----
+1 Slow DNS
+When launching a VM, it sometimes takes up to multiple minutes to connect with the CERN network, even though the network connection to the host is fine.
+This can occur on just one host-mac or multiple at once, it usually goes away until the next day. All macs are connected via Ethernet to the SFT Serverrack switch, maybe this is slow in registering virtual devices.
+On the virtualization end, the VMs are connected via 'Bridged Network - Default Adapter', so that it exposes the VMs WiFi and Ethernet.
+The VMs themselves show that they are connected via Ethernet, ipv4.
