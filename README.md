@@ -158,3 +158,16 @@ When launching a VM, it sometimes takes up to multiple minutes to connect with t
 This can occur on just one host-mac or multiple at once, it usually goes away until the next day. All macs are connected via Ethernet to the SFT Serverrack switch, maybe this is slow in registering virtual devices.
 On the virtualization end, the VMs are connected via 'Bridged Network - Default Adapter', so that it exposes the VMs WiFi and Ethernet.
 The VMs themselves show that they are connected via Ethernet, ipv4.
+
+General information
+-----
+1 Sharing
+Since VM hosts can be shared between SPI and ROOT, there has to be some kind of lockout function - if the host is in use by one of the Teams, the other Team can not access their VMs on it.
+ROOTs VMs are started by the vm_cycler.sh script from the MARBLE repo, which cycles between ROOT VMs, leaving enough time before starting the next VM for jenkins to start an SPI VM. If a VM is running, the vm_cycler.sh is able to determine, whether that VM is currently busy - if the VM is running a Runner.Listener process or a Jenkins agent, it is left alone and the script to cycle again after ten seconds. 
+In ROOTs case, the hosts state can be accessed by sshing to the host-mac and accessing /Users/sftnight/MARBLE/.vm_cycler.log.
+SPIs Jenkins starts VMs with this script, which checks, whether a Runner.Listener process is running on the VM that is currently active or whether the jenkins master has an active connection to that VM - if there is one, the script exits and Jenkins tries to launch a different node: https://gitlab.cern.ch/ai/it-puppet-hostgroup-lcgapp/-/blob/master/code/files/jenkins/sftnight/.ssh/start_vm.sh?ref_type=heads
+In Jenkins' case, the nodestate is visible on the Jenkins-webinterface. 
+"Failed to start the VM: Access denied. You do not have enough rights to use this virtual machine." means, that the vm_cycler.sh has locked down the VMs, because it is currently running a ROOT VM.
+
+2 build_drive.hdd
+This is a build drive, which is shared by all the VMs on that host to reduce storage overhead in builds. It is stored in /Users/sftnight/Parallels/build_drive.hdd. I was unable to mount it from the host directly, although this used to be possible and might still be, by using Parallels Mounter.
