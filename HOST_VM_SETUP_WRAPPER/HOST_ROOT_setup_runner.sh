@@ -10,6 +10,7 @@ fi
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SHARED_MARBLE_DIR="/Volumes/My\ Shared\ Files/Home/MARBLE"
+
 isVMon() {
   prlctl list --no-header | grep $VM_NAME | wc -l
 }
@@ -27,10 +28,8 @@ startVM() {
   echo "$VM_NAME is on."
 }
 
-if [ -z "$VM_NAME" ]; then echo "The first argument to this script should be the name of the VM you want to configure."
-else
-  startVM $VM_NAME
-  prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_03_activate_auto_runner_setup.sh $PAT" 
-fi
+startVM $VM_NAME
+prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_03_activate_auto_runner_setup.sh ${PAT}" 
+sleep 1
 
 prlctl stop $VM_NAME --kill
