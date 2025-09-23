@@ -52,7 +52,7 @@ Configure a VM host-mac (prerequisite)
    Check whether indexing is actually off.
    mdutil -s /
 
-(Add a private ssh key so that jenkins' public key matches it. (This is horrible practice and we should change it))
+12 (FOR SPI) Add a private ssh key from one of the other machines in use to /Users/sftnight/.ssh/authorized_keys so that jenkins' public key matches it.
 
 Create a CI VM
 -----
