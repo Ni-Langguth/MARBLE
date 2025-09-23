@@ -67,10 +67,13 @@ Either:
     Follow the printed instructions from that script.
 
 3 Download and install packages to the VM:
+
     For ROOT:
       Execute './HOST_VM_SETUP_WRAPPER/HOST_ROOT_setup_VM.sh $VM_NAME'
+      
     For SPI:
-      Execute 'HOST_SPI_setup_VM.sh $VM_NAME'
+      Execute './HOST_VM_SETUP_WRAPPER/HOST_SPI_setup_VM.sh $VM_NAME'
+    
     These scripts use the prlctl exec command to execute install-scripts, which are shared from the HOST to the VM, on the VM itself, installing packages there, which differ from team to team. Be sure to install the correct package versions for the correct MacOS version, they might differ too.
 
 Or:
@@ -80,13 +83,15 @@ Or:
 Then add the VM to CI:
 
   Bootstrap a daemon on the VM to perform automated tasks once the VM is launched:
+  
     For ROOT:
       Execute './HOST_VM_SETUP_WRAPPER/HOST_ROOT_setup_runner.sh $VM_NAME $PAT'
       The PAT is very important, without it, the runner will not be registered to the ROOT repo. PAT stands for personal access token, please refer to githubs documentation for more detailed information: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
-      To create your own, you need valid permissions in the ROOT repo, please ask your supervisor or the repo owner for the token.
-      The token itself needs the follwing permission: 
+      To create your own, you need valid permissions in the ROOT repo, please ask your supervisor or the repo owner for the token if you do not have permissions yourself.
+      The token needs the follwing permission: 
       https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens?apiVersion=2022-11-28#organization-permissions-for-self-hosted-runners
       A daemon and a matching script will be copied from ~/MARBLE to the VM and launch an ephemeral runner whenever the VM is started.
+    
     For SPI:
       Execute 'HOST_SPI_03_configure_daemon.sh $VM_NAME'
       The daemon executes a script, which checks once after 60 seconds, then in 10 second intervals, whether the VM is running the jenkins-agent - if not, the VM is stopped by the script, because it does not appear to be busy.
