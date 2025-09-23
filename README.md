@@ -91,10 +91,9 @@ Then add the VM to CI:
       The token needs the follwing permission: 
       https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens?apiVersion=2022-11-28#organization-permissions-for-self-hosted-runners
       A daemon and a matching script will be copied from ~/MARBLE to the VM and launch an ephemeral runner whenever the VM is started.
+      To start cycling between the VMs, execute './start_vm_cycler.sh', to stop it './stop_vm_cycler.sh'
     
     For SPI:
-      Execute 'HOST_SPI_03_configure_daemon.sh $VM_NAME'
-      The daemon executes a script, which checks once after 60 seconds, then in 10 second intervals, whether the VM is running the jenkins-agent - if not, the VM is stopped by the script, because it does not appear to be busy.
       Go to https://lcgapp-services.cern.ch/spi-jenkins/computer/new and copy one of the existing mac nodes, rename it and follow the naming scheme <host-name>-SPI-VM-macOS-<macos-version>, for example: macphsft41-SPI-VM-macOS-15.
       The node-name should match your VMs name
 
