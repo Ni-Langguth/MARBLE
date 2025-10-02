@@ -126,9 +126,10 @@ listAllRootVMs() {
 }
 
 pickRandomRootVM() {
-  RANDOM_INDEX=$(($RANDOM % ${#ALL_ROOT_VMS[@]}))
-  RANDOM_VM=${ALL_ROOT_VMS[$RANDOM_INDEX]}
-  echo $RANDOM_VM
+#  INDEX=$(($RANDOM % ${#ALL_ROOT_VMS[@]}))
+  INDEX=$(expr $((${INDEX}+1)) % 3)
+  NEXT_VM=${ALL_ROOT_VMS[$INDEX]}
+  echo $NEXT_VM
 }
 
 waitFor() {
@@ -161,6 +162,7 @@ LAST_RUN_VM=
 ALL_ROOT_VMS=($(listAllRootVMs))
 #echo $ALL_ROOT_VMS
 BUSY_SINCE=
+INDEX=0
 
 log "picking"
 RANDOM_VM=$(pickRandomRootVM)
@@ -201,12 +203,12 @@ while true; do
 #        log "${RUNNING_VM}is not a ROOT VM. The cycler will not interfere."
 #      fi
     done
-    waitFor 120
+    waitFor 60
   else 
     log "No VMs on this host."
     startVM $RANDOM_VM
     LAST_RUN_VM=$RANDOM_VM
-    waitFor 120
+    waitFor $(expr $((60 + $(($RANDOM % 60)))))
     log "Waiting period over on $RANDOM_VM! "
   fi
 done
