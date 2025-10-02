@@ -126,10 +126,8 @@ listAllRootVMs() {
 }
 
 pickRandomRootVM() {
-#  INDEX=$(($RANDOM % ${#ALL_ROOT_VMS[@]}))
-  INDEX=$(expr $((${INDEX}+1)) % 3)
+  INDEX=$(expr $((${INDEX}+1)) % ${#ALL_ROOT_VMS[@]})
   NEXT_VM=${ALL_ROOT_VMS[$INDEX]}
-  echo $NEXT_VM
 }
 
 waitFor() {
@@ -160,30 +158,23 @@ remoteUser=sftnight
 PARALLELS_DIR=/Users/sftnight/Parallels
 LAST_RUN_VM=
 ALL_ROOT_VMS=($(listAllRootVMs))
-#echo $ALL_ROOT_VMS
 BUSY_SINCE=
 INDEX=0
 
 log "picking"
-RANDOM_VM=$(pickRandomRootVM)
-log "picked $RANDOM_VM"
+log "picked $NEXT_VM"
 log "listing all"
 log "All VMs: $(listAllVMs)"
 log "All ROOT VMs: $(listAllRootVMs)"
 
 unlockAll
+pickRandomRootVM
 
 while true; do
-  while [[ "$RANDOM_VM" == "$LAST_RUN_VM" ]]; do
-    RANDOM_VM=$(pickRandomRootVM)
-  done
   if [[ $(lsof | grep macphsft | grep VM | grep macvm | wc -l) -gt 0 ]]; then
     RUNNING_VMS=$(listRunningVMs)
     log "There is a running VM on this host: ${RUNNING_VMS}"
     for RUNNING_VM in "${RUNNING_VMS[@]}"; do
-#      if [[ $RUNNING_VM == *ROOT* ]]; then
-
-#        if [[ "$(isVMGithubBusy $RUNNING_VM)" -eq 0 ]]; then
         if [[ "$(isVMJenkinsBusy $RUNNING_VM)" -eq 0 && "$(isVMGithubBusy $RUNNING_VM)" -eq 0 ]]; then
           log "${RUNNING_VM}is idle."
           LAST_RUN_VM=$RUNNING_VM
@@ -198,17 +189,14 @@ while true; do
             log "${RUNNING_VM}is busy since ${BUSY_SINCE}"
           fi
         fi
-
-#      else
-#        log "${RUNNING_VM}is not a ROOT VM. The cycler will not interfere."
-#      fi
     done
     waitFor 60
   else 
     log "No VMs on this host."
-    startVM $RANDOM_VM
-    LAST_RUN_VM=$RANDOM_VM
+    pickRandomRootVM
+    sleep 1
+    startVM $NEXT_VM
     waitFor $(expr $((60 + $(($RANDOM % 60)))))
-    log "Waiting period over on $RANDOM_VM! "
+    log "Waiting period over on $NEXT_VM! "
   fi
 done
