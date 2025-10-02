@@ -1,6 +1,6 @@
 #!/bin/bash
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LOGFILE="$DIR/.vm_cycler.log"
+LOGFILE="$DIR/vm_cycler.log"
 SCRIPT="vm_cycler.sh"
 
 if [[ $(pgrep -f ${SCRIPT}) ]]; then
