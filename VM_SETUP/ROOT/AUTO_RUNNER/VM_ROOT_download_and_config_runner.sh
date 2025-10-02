@@ -20,7 +20,7 @@ if [[ "$RUNNER_VERSION" != "$CURRENT_RUNNER_VERSION" ]]; then
 fi
 
 # At the time of writing, macos26 is the beta version of macos - keep this up to date when the next beta comes
-if [[ ${PRIMARY_MAC_OS_VERSION} == "26" ]]; then
+if [[ ${PRIMARY_MAC_OS_VERSION} == "" ]]; then
   PRIMARY_MAC_OS_VERSION=beta
   RUNNER_LABELS="self-hosted,macOS,mac-${PRIMARY_MAC_OS_VERSION},arm64"
 else
