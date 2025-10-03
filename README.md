@@ -82,20 +82,18 @@ Or:
 
 Then add the VM to CI:
 
-  Bootstrap a daemon on the VM to perform automated tasks once the VM is launched:
-  
-    For ROOT:
-      Execute './HOST_VM_SETUP_WRAPPER/HOST_ROOT_setup_runner.sh $VM_NAME $PAT'
-      The PAT is very important, without it, the runner will not be registered to the ROOT repo. PAT stands for personal access token, please refer to githubs documentation for more detailed information: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
-      To create your own, you need valid permissions in the ROOT repo, please ask your supervisor or the repo owner for the token if you do not have permissions yourself.
-      The token needs the follwing permission: 
-      https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens?apiVersion=2022-11-28#organization-permissions-for-self-hosted-runners
-      A daemon and a matching script will be copied from ~/MARBLE to the VM and launch an ephemeral runner whenever the VM is started.
-      To start cycling between the VMs, execute './start_vm_cycler.sh', to stop it './stop_vm_cycler.sh'
+For ROOT:
+  Execute './HOST_VM_SETUP_WRAPPER/HOST_ROOT_setup_runner.sh $VM_NAME $PAT'
+  The PAT is very important, without it, the runner will not be registered to the ROOT repo. PAT stands for personal access token, please refer to githubs documentation for more detailed information: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+  To create your own, you need valid permissions in the ROOT repo, please ask your supervisor or the repo owner for the token if you do not have permissions yourself.
+  The token needs the follwing permission: 
+  https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens?apiVersion=2022-11-28#organization-permissions-for-self-hosted-runners
+  A daemon and a matching script will be copied from ~/MARBLE to the VM and launch an ephemeral runner whenever the VM is started.
+  To start cycling between the VMs, execute './start_vm_cycler.sh', to stop it './stop_vm_cycler.sh'
     
-    For SPI:
-      Go to https://lcgapp-services.cern.ch/spi-jenkins/computer/new and copy one of the existing mac nodes, rename it and follow the naming scheme <host-name>-SPI-VM-macOS-<macos-version>, for example: macphsft41-SPI-VM-macOS-15.
-      The node-name should match your VMs name
+For SPI:
+  Go to https://lcgapp-services.cern.ch/spi-jenkins/computer/new and copy one of the existing mac nodes, rename it and follow the naming scheme <host-name>-SPI-VM-macOS-<macos-version>, for example: macphsft41-SPI-VM-macOS-15.
+  The node-name should match your VMs name
 
 Upload a VM to the S3 bucket
 -----
