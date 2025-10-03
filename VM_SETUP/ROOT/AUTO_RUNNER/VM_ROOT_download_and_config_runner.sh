@@ -38,6 +38,14 @@ REG_TOKEN=$(
 
 mkdir -p ${USER_DIR}/${RUNNER_DIR}
 
+rm ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
+mkdir -p /Volumes/build_drive/ROOT-macOS-${PRIMARY_MAC_OS_VERSION}/${WORK_DIR}
+ln -s  /Volumes/build_drive/ROOT-macOS-${PRIMARY_MAC_OS_VERSION}/${WORK_DIR} ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
+
+rm /Users/sftnight/ROOT-CI
+mkdir -p /Volumes/build_drive/ROOT-macOS-${PRIMARY_MAC_OS_VERSION}/ROOT-CI
+ln -s /Volumes/build_drive/ROOT-macOS-${PRIMARY_MAC_OS_VERSION}/ROOT-CI /Users/sftnight/ROOT-CI
+
 # Unpack runner tarball
 tar xzf ${USER_DIR}/actions-runner-osx-arm64-${RUNNER_VERSION#v}.tar.gz -C ${USER_DIR}/${RUNNER_DIR}
 
@@ -52,10 +60,7 @@ ${USER_DIR}/${RUNNER_DIR}/config.sh --unattended \
   --work   "${WORK_DIR}" \
   --ephemeral \
   --replace 
-rm -rf ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
-ln -s  /Volumes/build_drive/ROOT-macOS-${PRIMARY_MAC_OS_VERSION}/${WORK_DIR} ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
 #sudo chown -R sftnight:staff ${USER_DIR}/${RUNNER_DIR}/${WORK_DIR}
 
 # Launch runner
 $USER_DIR/${RUNNER_DIR}/run.sh
-
