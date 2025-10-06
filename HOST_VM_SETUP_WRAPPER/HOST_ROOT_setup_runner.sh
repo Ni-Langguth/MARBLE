@@ -14,7 +14,6 @@ SHARED_MARBLE_DIR="/Volumes/My\ Shared\ Files/Home/MARBLE"
 isVMon() {
   prlctl list --no-header | grep $VM_NAME | wc -l
 }
-
 ${DIR}/../.unlock_all_vms.sh
 
 startVM() {
@@ -33,3 +32,7 @@ prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_03_activate_aut
 sleep 1
 
 prlctl stop $VM_NAME --kill
+
+ssh-keygen -t ed25519 -f ~/.ssh/parallels_vm_key
+ssh-keygen -y -f ~/.ssh/parallels_vm_key >> ~/.ssh/authorized_keys
+
