@@ -5,6 +5,7 @@ MARBLE strives to work around Apples restrictions in dockerization of MacOS by a
 This approach allows the maintenance of a consistent build environment and automates the up- and download of the virtual machines to a prefconfigured S3 bucket, laying important groundwork for a scalable MacOS VM service in the SFT group, that can be used by ROOT and the parts of SPI, which don't require cvmfs (it relying on macfuse, which is a kernel - not a system - extension does not allow it to be used on mac VMs on apple silicon).
 Instructions in this readme contain:
  - Configure a VM host-mac
+ - Get Parallels
  - Create a VM (for debugging and CI)
  - Add a VM to CI
  - Upload a VM to the S3 bucket
@@ -35,24 +36,26 @@ Configure a VM host-mac (prerequisite)
 5 xcode
   Execute 'xcode-select --install' and accept the GUI popup to install xcode.
 
-6 Enroll in mdm and follow instructions: https://devices.docs.cern.ch/devices/mac/MacSelfService/Enrolling/
-  
-7 Log into Self-Service with SSO.
+6 Pull this repo to the home directory of your user /Users/sftnight. It has to be this directory for the execution of the scripts on the VM to work.
 
-8 Find and request Parallels Desktop in Self-Service.
-
-9 Download s3cmd python package for interaction with macVM bucket: https://openstack.cern.ch/project/containers/container/macvmstorage
-  python3 -m pip install s3cmd
-  scp macphsft41:/Users/sftnight/MARBLE/.s3cfg $HOST_NAME:/Users/sftnight/MARBLE
-
-10 Pull this repo to the home directory of your user /Users/sftnight. It has to be this directory for the execution of the scripts on the VM to work.
-
-11 Disable indexing on the whole mac to save computing ressources.
+7 Disable indexing on the whole mac to save computing ressources.
    sudo mdutil -i off /
    Check whether indexing is actually off.
    mdutil -s /
 
-12 (FOR SPI) Add a private ssh key from one of the other machines in use to /Users/sftnight/.ssh/authorized_keys so that jenkins' public key matches it.
+8 (FOR SPI) Add a private ssh key from one of the other machines in use to /Users/sftnight/.ssh/authorized_keys so that jenkins' public key matches it.
+
+Get Parallels
+-----
+1 Enroll in mdm and follow instructions: https://devices.docs.cern.ch/devices/mac/MacSelfService/Enrolling/
+  
+2 Log into Self-Service with SSO.
+
+3 Find and request Parallels Desktop in Self-Service.
+
+4 Download s3cmd python package for interaction with macVM bucket: https://openstack.cern.ch/project/containers/container/macvmstorage
+  python3 -m pip install s3cmd
+  scp macphsft41:/Users/sftnight/MARBLE/.s3cfg $HOST_NAME:/Users/sftnight/MARBLE
 
 Create a CI VM
 -----
@@ -124,13 +127,14 @@ How to debug a problem
   - Follow 'Download a VM from an S3 bucket'
 
 2 On a CI host-mac
-  - Disable the vm_cycler.sh to stop cycling the VMs
+  - ssh host-mac (host-macs are listed in spreadsheet)
+  - Disable the vm_cycler.sh to stop cycling the VMs ( ./MARBLE/stop_vm_cycler.sh )
   - Lock all other VMs from starting by executing 'LOCK_ALL_EXCEPT.sh $VM_NAME' where VM_NAME is the mac you want to work on.
   - If you are from SPI and want to work on an SPI mac
-    - Remove the macXXarm label from the jenkins node you want to work on
+    - Remove the macXXarm label from the SPI mac you want to work on in Jenkins
     - Overview of jenkins mac-vm nodes: https://lcgapp-services.cern.ch/spi-jenkins/label/macVM/
   IMPORTANT once you are done working on the CI host-mac:
-  - Launch 'vm_cycler.sh'
+  - Launch 'vm_cycler.sh' ( ./MARBLE/start_vm_cycler.sh )
   - If you removed the Jenkins label, return it
 
 Some useful prlctl commands
