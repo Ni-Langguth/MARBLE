@@ -177,3 +177,19 @@ In Jenkins' case, the nodestate is visible on the Jenkins-webinterface.
 
 2 build_drive.hdd
 This is a build drive, which is shared by all the VMs on that host to reduce storage overhead in builds. It is stored in /Users/sftnight/Parallels/build_drive.hdd. I was unable to mount it from the host directly, although this used to be possible and might still be, by using Parallels Mounter.
+
+Some explanations about what the different scripts do
+-----
+vm_cycler.sh turns ROOT vms on and off in 60s+random intervals.
+Whenever a ROOT VM is turned off, 60s are spent waiting if spi jenkins starts any VMs on the host - vm_cycler can turn off jenkins VMs and jenkins can turn off ROOT VMs, as long as they are not running CI jobs.
+When this timer is run out, a ROOT VM is started, cycling between all ROOT VMs on the system.
+start_vm_cycler.sh starts and stop_vm_cycler.sh stops the vm_cycler.
+
+HOST_create_vm.sh  creates a VM from an ipsw file in the first place
+HOST_ROOT_setup_VM.sh installs packages for ROOT onto VM
+HOST_SPI_setup_VM.sh installs packages for SPI onto VM
+
+S3_UPLOAD_VM.sh uploads a VM from a host to the bucket - and removes the secret github PAT from the VM, without which the VM can not register a runner to the CI 
+S3_DOWNLOAD_VM.sh downloads a VM from the bucket to a host
+HOST_ROOT_setup_runner.sh copies the necessary script and daemon to a freshly created or downloaded VM and writes the github PAT onto it, so that the VM can register a runner automatically
+AUTO_RUNNER contains the daemon and the script that the VM uses to launch the runner by itself
