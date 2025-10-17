@@ -178,6 +178,9 @@ In Jenkins' case, the nodestate is visible on the Jenkins-webinterface.
 2 build_drive.hdd
 This is a build drive, which is shared by all the VMs on that host to reduce storage overhead in builds. It is stored in /Users/sftnight/Parallels/build_drive.hdd. I was unable to mount it from the host directly, although this used to be possible and might still be, by using Parallels Mounter.
 
+3 Only one VM at a time
+Because of the build_drive that is being mounted by each VM on a host, only one VM can be on on a single host at a time.
+
 Some explanations about what the different scripts do
 -----
 vm_cycler.sh turns ROOT vms on and off in 60s+random intervals.
