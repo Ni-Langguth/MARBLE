@@ -23,7 +23,8 @@ chown -R sftnight:staff /Volumes/build_drive/SPI-macOS-${VERSION}
 
 # LINK SSH KEY FROM HOST TO VM FOR SCRIPTING
 mkdir /Users/sftnight/.ssh
-ln -s /Volumes/My\ Shared\ Files/Home/.ssh/parallels_vm_key.pub /Users/sftnight/.ssh/authorized_keys
+ln -s /Volumes/My\ Shared\ Files/Home/.ssh/authorized_keys /Users/sftnight/.ssh/authorized_keys
+ln -s /Volumes/My\ Shared\ Files/Home/.ssh/parallels_vm_key /Users/sftnight/.ssh/parallels_vm_key
 sudo chown -R sftnight:staff /Users/sftnight/.ssh
 
 # UPDATE MACOS TO LATEST VERSION
