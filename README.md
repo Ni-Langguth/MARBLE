@@ -98,15 +98,26 @@ For SPI:
   Go to https://lcgapp-services.cern.ch/spi-jenkins/computer/new and copy one of the existing mac nodes, rename it and follow the naming scheme <host-name>-SPI-VM-macOS-<macos-version>, for example: macphsft41-SPI-VM-macOS-15.
   The node-name should match your VMs name
 
+Replace a VM on a host
+-----
+1 ./stop_vm_cycler.sh
+2 check whether there are running VMs with prlctl list, if not, jump to step 4
+3 If there are running VMs, check whether they are busy running a process for Jenkins with `prlctl exec $VM_NAME "ps -ef | grep jenkins | grep -v 'grep' >/dev/null 2>&1 && echo 1 || echo 0"` and check whether busy running the Runner.Worker process for GitHub actions with `prlctl exec $VM_NAME "pgrep -f 'Runner.Worker' >/dev/null 2>&1 && echo 1 || echo 0"`. If both of those commands return 0, turn off the virtual machines with `prlctl stop $VM_NAME --kill`. If either of those commands does not return 0, do not turn off the VM - if you do, you will cancel or interrupt a CI run - wait until the command that returned 1 returns 0 as well, then turn it off with `prlctl stop $VM_NAME --kill`.
+4 When no more virtual machines are running on the host, unlock all VMs, by executing `./.unlock_all_vms.sh`.
+5 Lock all VMs except the one you want to work on by executing `./LOCK_ALL_EXCEPT.sh $VM_NAME`.
+6 Check which VMs are available in the S3 bucket by executing `s3cmd ls s3://macvmstorage/SPI/` or `s3cmd ls s3://macvmstorage/ROOT/` and pick a VM image.
+7 Pick a VM and download it from the bucket by following the steps in "Download a VM from an S3 bucket".
+8 Return the host back to its previous working state by running `./.unlock_all_vms.sh` or `./start_vm_cycler.sh`.
+
 Upload a VM to the S3 bucket
 -----
 1 Execute './S3_UPLOAD.sh $VM_NAME'
 
 Download a VM from an S3 bucket
 -----
-1 Execute './S3_DOWNLOAD.sh $VM_NAME'
+1 Execute './S3_DOWNLOAD.sh $VM_NAME' (omit the .zip ending from the $VM_NAME, example: `./S3_DOWNLOAD.sh 2025-09-18-SPI-VM-macOS-13`)
 
-2 Read the print from executing this script and follow the instructions in it to do those things manually, which I was unable to automate.
+2 Read the print from executing this script and follow the instructions.
 
 3 (optional) If you want to add this VM to the CI pool for ROOT or SPI, follow the respective instruction sets, printed by the script and enter the new host-mac to the excel sheet.
 
