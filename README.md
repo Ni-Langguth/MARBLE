@@ -184,13 +184,9 @@ On Linux:
 
 2 Start Remmina
 
-3 Click the little + in the top left
+3 Select VNC in the dropdown left of the center bar, fill the VM_NAME into the center bar and hit ENTER
 
-4 In the dropdown menu "Protocol", choose "Remmina VNC listener Plugin"
-
-5 Fill "Server" in with VM_NAME and "Username" with "sftnight".
-
-6 Save and Connect
+<img width="766" height="511" alt="image" src="https://github.com/user-attachments/assets/6512d23e-a9fb-4e8e-be1d-3993e082d951" />
 
 Some common problems
 -----
