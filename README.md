@@ -175,6 +175,21 @@ prlctl exec $VM_NAME "$COMMAND"
 6 All prlctl commands are documented here as well
 https://download.parallels.com/desktop/v20/docs/en_US/Parallels%20Desktop%20Command-Line%20Reference.pdf
 
+Connecting to a host via Remmina
+-----
+INFO: first of all, this is only possible after the "Sharing" settings for the host are applied, this can technically be done through CLI as long as there are no additional barriers in place. If the command to set those settings through CLI is found, please add them here. Otherwise, configure the settings through the hosts GUI.
+
+On Linux:
+1 Download Remmina https://remmina.org/how-to-install-remmina/
+
+2 Start Remmina
+
+3 Click the little + in the top left
+
+4 Fill "Server" in with VM_NAME and "Username" with sftnight.
+
+5 Save and Connect
+
 Some common problems
 -----
 1 Slow DNS
