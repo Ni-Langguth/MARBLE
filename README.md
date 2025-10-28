@@ -186,9 +186,11 @@ On Linux:
 
 3 Click the little + in the top left
 
-4 Fill "Server" in with VM_NAME and "Username" with sftnight.
+4 In the dropdown menu "Protocol", choose "Remmina VNC listener Plugin"
 
-5 Save and Connect
+5 Fill "Server" in with VM_NAME and "Username" with "sftnight".
+
+6 Save and Connect
 
 Some common problems
 -----
