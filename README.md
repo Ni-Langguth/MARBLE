@@ -146,14 +146,16 @@ How to debug a problem
 
 2 On a CI host-mac
   - ssh host-mac (host-macs are listed in spreadsheet)
+  - unlock all VMs (./MARBLE/.unlock_all_vms.sh)
   - Disable the vm_cycler.sh to stop cycling the VMs ( ./MARBLE/stop_vm_cycler.sh )
   - Lock all other VMs from starting by executing 'LOCK_ALL_EXCEPT.sh $VM_NAME' where VM_NAME is the mac you want to work on.
   - If you are from SPI and want to work on an SPI mac
-    - Remove the macXXarm label from the SPI mac you want to work on in Jenkins
+    - Take the SPI node macs hosted on the mac you want to work on offline in Jenkins
     - Overview of jenkins mac-vm nodes: https://lcgapp-services.cern.ch/spi-jenkins/label/macVM/
+    - Click on the VMs on the host you are working on, click on "Mark this node temporarily offline"
   IMPORTANT once you are done working on the CI host-mac:
   - Launch 'vm_cycler.sh' ( ./MARBLE/start_vm_cycler.sh )
-  - If you removed the Jenkins label, return it
+  - If you turned off any Jenkins nodes, turn them back on
 
 Some useful prlctl commands
 -----
