@@ -6,7 +6,7 @@ else
   VM_NAME=$1
 fi
 
-SHARED_MARBLE_DIR="/Volumes/My\ Shared\ Files/Home/MARBLE"
+SHARED_BARMAN_DIR="/Volumes/My\ Shared\ Files/Home/BARMAN"
 
 isVMon() {
   prlctl list --no-header | grep $VM_NAME | wc -l
@@ -27,6 +27,6 @@ ssh-keygen -y -f ~/.ssh/parallels_vm_key >> ~/.ssh/authorized_keys
 if [ -z "$VM_NAME" ]; then echo "The first argument to this script should be the name of the VM you want to configure."
 else
   startVM $VM_NAME
-  prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_01_configure.sh $VM_NAME" 
-  prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_02_system_installs.sh $VM_NAME" 
+  prlctl exec $VM_NAME "${SHARED_BARMAN_DIR}/VM_SETUP/ROOT/VM_ROOT_01_configure.sh $VM_NAME"
+  prlctl exec $VM_NAME "${SHARED_BARMAN_DIR}/VM_SETUP/ROOT/VM_ROOT_02_system_installs.sh $VM_NAME"
 fi
