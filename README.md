@@ -1,7 +1,7 @@
-# MARBLE
-MacOS Actions Runners Balancing Load Efficiently
+# BARMAN
+Balancing Actions Runners for macOS Across Nodes
 
-MARBLE strives to work around Apples restrictions in dockerization of MacOS by automating the creation and configuration of MacOS virtual machines with the Parallels Desktop virtualization software as far as possible and instructing in the ways that could not be automated.
+BARMAN strives to work around Apples restrictions in dockerization of MacOS by automating the creation and configuration of MacOS virtual machines with the Parallels Desktop virtualization software as far as possible and instructing in the ways that could not be automated.
 This approach allows the maintenance of a consistent build environment and automates the up- and download of the virtual machines to a prefconfigured S3 bucket, laying important groundwork for a scalable MacOS VM service in the SFT group, that can be used by ROOT and the parts of SPI, which don't require cvmfs (it relying on macfuse, which is a kernel - not a system - extension does not allow it to be used on mac VMs on apple silicon).
 Instructions in this readme contain:
  - Configure a VM host-mac
@@ -55,7 +55,7 @@ Get Parallels
 
 4 Download s3cmd python package for interaction with macVM bucket: https://openstack.cern.ch/project/containers/container/macvmstorage
   python3 -m pip install s3cmd
-  scp macphsft41:/Users/sftnight/MARBLE/.s3cfg $HOST_NAME:/Users/sftnight/MARBLE
+  scp macphsft41:/Users/sftnight/BARMAN/.s3cfg $HOST_NAME:/Users/sftnight/BARMAN
 
 Create a CI VM
 -----
@@ -91,7 +91,7 @@ For ROOT:
   To create your own, you need valid permissions in the ROOT repo, please ask your supervisor or the repo owner for the token if you do not have permissions yourself.
   The token needs the follwing permission: 
   https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens?apiVersion=2022-11-28#organization-permissions-for-self-hosted-runners
-  A daemon and a matching script will be copied from ~/MARBLE to the VM and launch an ephemeral runner whenever the VM is started.
+  A daemon and a matching script will be copied from ~/BARMAN to the VM and launch an ephemeral runner whenever the VM is started.
   To start cycling between the VMs, execute './start_vm_cycler.sh', to stop it './stop_vm_cycler.sh'
     
 For SPI:
@@ -146,15 +146,15 @@ How to debug a problem
 
 2 On a CI host-mac
   - ssh host-mac (host-macs are listed in spreadsheet)
-  - unlock all VMs (./MARBLE/.unlock_all_vms.sh)
-  - Disable the vm_cycler.sh to stop cycling the VMs ( ./MARBLE/stop_vm_cycler.sh )
+  - unlock all VMs (./BARMAN/.unlock_all_vms.sh)
+  - Disable the vm_cycler.sh to stop cycling the VMs ( ./BARMAN/stop_vm_cycler.sh )
   - Lock all other VMs from starting by executing 'LOCK_ALL_EXCEPT.sh $VM_NAME' where VM_NAME is the mac you want to work on.
   - If you are from SPI and want to work on an SPI mac
     - Take the SPI node macs hosted on the mac you want to work on offline in Jenkins
     - Overview of jenkins mac-vm nodes: https://lcgapp-services.cern.ch/spi-jenkins/label/macVM/
     - Click on the VMs on the host you are working on, click on "Mark this node temporarily offline"
   IMPORTANT once you are done working on the CI host-mac:
-  - Launch 'vm_cycler.sh' ( ./MARBLE/start_vm_cycler.sh )
+  - Launch 'vm_cycler.sh' ( ./BARMAN/start_vm_cycler.sh )
   - If you turned off any Jenkins nodes, turn them back on
 
 Some useful prlctl commands
@@ -202,10 +202,10 @@ General information
 -----
 1 Sharing
 Since VM hosts can be shared between SPI and ROOT, there has to be some kind of lockout function - if the host is in use by one of the Teams, the other Team can not access their VMs on it.
-ROOTs VMs are started by the vm_cycler.sh script from the MARBLE repo, which cycles between ROOT VMs, leaving enough time before starting the next VM for jenkins to start an SPI VM. If a VM is running, the vm_cycler.sh is able to determine, whether that VM is currently busy - if the VM is running a Runner.Listener process or a Jenkins agent, it is left alone and the script to cycle again after ten seconds. 
-In ROOTs case, the hosts state can be accessed by sshing to the host-mac and accessing /Users/sftnight/MARBLE/.vm_cycler.log.
+ROOTs VMs are started by the vm_cycler.sh script from the BARMAN repo, which cycles between ROOT VMs, leaving enough time before starting the next VM for jenkins to start an SPI VM. If a VM is running, the vm_cycler.sh is able to determine, whether that VM is currently busy - if the VM is running a Runner.Listener process or a Jenkins agent, it is left alone and the script to cycle again after ten seconds.
+In ROOTs case, the hosts state can be accessed by sshing to the host-mac and accessing /Users/sftnight/BARMAN/.vm_cycler.log.
 SPIs Jenkins starts VMs with this script, which checks, whether a Runner.Listener process is running on the VM that is currently active or whether the jenkins master has an active connection to that VM - if there is one, the script exits and Jenkins tries to launch a different node: https://gitlab.cern.ch/ai/it-puppet-hostgroup-lcgapp/-/blob/master/code/files/jenkins/sftnight/.ssh/start_vm.sh?ref_type=heads
-In Jenkins' case, the nodestate is visible on the Jenkins-webinterface. 
+In Jenkins' case, the nodestate is visible on the Jenkins-webinterface.
 "Failed to start the VM: Access denied. You do not have enough rights to use this virtual machine." means, that the vm_cycler.sh has locked down the VMs, because it is currently running a ROOT VM.
 
 2 build_drive.hdd

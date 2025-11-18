@@ -9,7 +9,7 @@ else
 fi
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SHARED_MARBLE_DIR="/Volumes/My\ Shared\ Files/Home/MARBLE"
+SHARED_BARMAN_DIR="/Volumes/My\ Shared\ Files/Home/BARMAN"
 
 isVMon() {
   prlctl list --no-header | grep $VM_NAME | wc -l
@@ -28,7 +28,7 @@ startVM() {
 }
 
 startVM $VM_NAME
-prlctl exec $VM_NAME "${SHARED_MARBLE_DIR}/VM_SETUP/ROOT/VM_ROOT_03_activate_auto_runner_setup.sh ${PAT}" 
+prlctl exec $VM_NAME "${SHARED_BARMAN_DIR}/VM_SETUP/ROOT/VM_ROOT_03_activate_auto_runner_setup.sh ${PAT}"
 sleep 1
 
 prlctl stop $VM_NAME --kill
